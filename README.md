@@ -5,7 +5,7 @@ This repository contains the official Alignbase plugin packages for the OpenAI u
 ## OpenAI
 
 ```sh
-codex plugin marketplace add Sunpeak-AI/alignbase-marketplace &&
+codex plugin marketplace add Alignbase/alignbase-marketplace &&
 codex plugin add alignbase@alignbase
 ```
 
@@ -16,13 +16,13 @@ Enable the plugin, connect the Alignbase MCP server when prompted, and sign in t
 Open **Customize > Plugins > + > Add marketplace > Add from a repository**.
 
 ```text
-https://github.com/Sunpeak-AI/alignbase-marketplace
+https://github.com/Alignbase/alignbase-marketplace
 ```
 
 Or install with Claude Code:
 
 ```sh
-claude plugin marketplace add Sunpeak-AI/alignbase-marketplace &&
+claude plugin marketplace add Alignbase/alignbase-marketplace &&
 claude plugin install alignbase@alignbase &&
 claude
 ```

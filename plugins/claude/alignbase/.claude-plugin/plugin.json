@@ -10,7 +10,7 @@
     "url": "https://alignbase.ai"
   },
   "homepage": "https://alignbase.ai",
-  "repository": "https://github.com/Sunpeak-AI/alignbase-marketplace",
+  "repository": "https://github.com/Alignbase/alignbase-marketplace",
   "license": "MIT",
   "keywords": ["agents", "context", "governance", "mcp"]
 }

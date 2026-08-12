@@ -30,7 +30,7 @@ The metadata does not claim an endorsement, compare Alignbase with another produ
 | Developer | Alignbase |
 | Contact email | `support@alignbase.ai` |
 | Website | `https://alignbase.ai` |
-| Repository | `https://github.com/Sunpeak-AI/alignbase-marketplace` |
+| Repository | `https://github.com/Alignbase/alignbase-marketplace` |
 | MCP server | `https://app.alignbase.ai/mcp` |
 | Authentication | OAuth 2.0 authorization code flow with PKCE and dynamic client registration |
 | OAuth scopes | `context.read`, `context.write` |
@@ -172,7 +172,7 @@ The same Claude directory listing is available in Cowork and Claude Code. In Cla
 
 | Field | Value or action |
 | --- | --- |
-| Plugin GitHub link | `https://github.com/Sunpeak-AI/alignbase-marketplace/tree/main/plugins/claude/alignbase` |
+| Plugin GitHub link | `https://github.com/Alignbase/alignbase-marketplace/tree/main/plugins/claude/alignbase` |
 | Repository visibility | Public |
 | Name | Alignbase |
 | Description | Load your team's approved Alignbase context and Skills at session start. |
@@ -228,9 +228,9 @@ Apart from section 2F, the package now uses the current manifest schema, has nar
 | Organization name | Alignbase |
 | Organization handle | `alignbase` |
 | Contact email | `support@alignbase.ai` |
-| Logotype URL | `https://raw.githubusercontent.com/Sunpeak-AI/alignbase-marketplace/main/plugins/cursor/alignbase/assets/alignbase-logo.svg` |
+| Logotype URL | `https://raw.githubusercontent.com/Alignbase/alignbase-marketplace/main/plugins/cursor/alignbase/assets/alignbase-logo.svg` |
 | Organization description | Alignbase gives teams one place to manage and distribute approved context and Skills to their AI agents. |
-| GitHub repository | `https://github.com/Sunpeak-AI/alignbase-marketplace` |
+| GitHub repository | `https://github.com/Alignbase/alignbase-marketplace` |
 | Owner | Select the signed-in company account or team |
 | Website URL | `https://alignbase.ai` |
 | Publisher Terms | Accept after the company approves the remaining license grant, indemnity, and data obligations |

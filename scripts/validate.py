@@ -155,6 +155,10 @@ def main() -> None:
         "plugins/cursor/alignbase/assets/alignbase-logo.svg"
     )
 
+    grok_catalog = read_json(".grok-plugin/marketplace.json")
+    assert grok_catalog["name"] == "alignbase"
+    assert grok_catalog["plugins"][0]["source"] == "./plugins/grok/alignbase"
+
     codex_manifest = read_json("plugins/codex/alignbase/.codex-plugin/plugin.json")
     assert codex_manifest["name"] == "alignbase"
     assert codex_manifest["mcpServers"] == "./.mcp.json"
@@ -215,6 +219,18 @@ def main() -> None:
     assert_png_logo("plugins/cursor/alignbase/assets/alignbase-logo.png")
     assert_mcp_server("plugins/cursor/alignbase/mcp.json")
 
+    grok_manifest = read_json("plugins/grok/alignbase/plugin.json")
+    assert grok_manifest["name"] == "alignbase"
+    assert grok_manifest["mcpServers"] == "./.mcp.json"
+    assert "hooks" not in grok_manifest
+    assert_mcp_server("plugins/grok/alignbase/.mcp.json")
+    grok_server = read_json("plugins/grok/alignbase/.mcp.json")["mcpServers"]["alignbase"]
+    assert grok_server["type"] == "http"
+    grok_readme = (ROOT / "plugins/grok/alignbase/README.md").read_text(encoding="utf-8")
+    assert "get_current_context" in grok_readme
+    assert "~/.grok/AGENTS.md" in grok_readme
+    assert "session-start hooks cannot add instructions" in grok_readme
+
     png_logos = {
         (ROOT / f"plugins/{vendor}/alignbase/assets/alignbase-logo.png").read_bytes()
         for vendor in ("codex", "claude", "cursor")
@@ -230,8 +246,10 @@ def main() -> None:
         codex_manifest["version"],
         claude_manifest["version"],
         cursor_manifest["version"],
+        grok_manifest["version"],
         claude_catalog["metadata"]["version"],
         cursor_catalog["metadata"]["version"],
+        grok_catalog["metadata"]["version"],
     }
     assert len(versions) == 1
     assert claude_catalog["metadata"]["version"] == claude_manifest["version"]
@@ -239,11 +257,13 @@ def main() -> None:
         "plugins/codex/alignbase",
         "plugins/claude/alignbase",
         "plugins/cursor/alignbase",
+        "plugins/grok/alignbase",
     ):
         manifest_name = {
             "plugins/codex/alignbase": ".codex-plugin/plugin.json",
             "plugins/claude/alignbase": ".claude-plugin/plugin.json",
             "plugins/cursor/alignbase": ".cursor-plugin/plugin.json",
+            "plugins/grok/alignbase": "plugin.json",
         }[plugin_root]
         assert read_json(f"{plugin_root}/{manifest_name}")["license"] == "MIT"
         assert (ROOT / plugin_root / "LICENSE").read_bytes() == root_license

@@ -1,16 +1,15 @@
 {
   "name": "alignbase",
   "version": "1.0.11",
-  "description": "Load your team's approved Alignbase context and Skills at session start.",
+  "description": "Connect Grok to the context and Skills assigned to this agent in Alignbase.",
   "author": {
     "name": "Alignbase",
-    "email": "support@alignbase.ai"
+    "email": "support@alignbase.ai",
+    "url": "https://alignbase.ai"
   },
   "homepage": "https://alignbase.ai",
   "repository": "https://github.com/Alignbase/alignbase-marketplace",
   "license": "MIT",
   "keywords": ["agents", "context", "governance", "mcp"],
-  "logo": "assets/alignbase-logo.svg",
-  "hooks": "./hooks/hooks.json",
-  "mcpServers": "./mcp.json"
+  "mcpServers": "./.mcp.json"
 }

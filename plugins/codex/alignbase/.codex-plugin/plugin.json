@@ -1,6 +1,6 @@
 {
   "name": "alignbase",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Load your team's approved Alignbase context and Skills at session start.",
   "author": {
     "name": "Alignbase",

@@ -15,6 +15,10 @@ MIN_OPENAI_RASTER_DIMENSION = 48
 MAX_OPENAI_RASTER_DIMENSION = 4096
 
 
+if not __debug__:
+    raise RuntimeError("Marketplace validation requires Python assertions")
+
+
 def read_json(relative_path: str) -> dict:
     path = ROOT / relative_path
     with path.open(encoding="utf-8") as handle:
@@ -173,7 +177,14 @@ def main() -> None:
     assert codex_manifest["interface"]["composerIcon"] == codex_logo
     assert_png_logo("plugins/codex/alignbase/assets/alignbase-logo.png")
     assert_svg_logo("plugins/codex/alignbase/assets/alignbase-logo.svg")
-    assert_mcp_server("plugins/codex/alignbase/.mcp.json", wrapped=False)
+    codex_mcp = read_json("plugins/codex/alignbase/.mcp.json")
+    assert set(codex_mcp) == {"mcpServers"}
+    assert set(codex_mcp["mcpServers"]) == {"alignbase"}
+    assert_mcp_server("plugins/codex/alignbase/.mcp.json")
+    codex_server = codex_mcp["mcpServers"]["alignbase"]
+    assert set(codex_server) == {"type", "url", "oauth_resource"}
+    assert codex_server["type"] == "http"
+    assert codex_server["oauth_resource"] == MCP_URL
 
     codex_hooks = read_json("plugins/codex/alignbase/hooks/hooks.json")
     codex_hook = codex_hooks["hooks"]["SessionStart"][0]["hooks"][0]

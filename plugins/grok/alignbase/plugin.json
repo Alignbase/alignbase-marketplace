@@ -1,6 +1,6 @@
 {
   "name": "alignbase",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Connect Grok to the context and Skills assigned to this agent in Alignbase.",
   "author": {
     "name": "Alignbase",

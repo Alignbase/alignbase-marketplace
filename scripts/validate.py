@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MCP_URL = "https://app.alignbase.ai/mcp"
+OPENAI_APP_ID = "asdk_app_6a6bd5435cc08191846e6a069bddcb16"
 MAX_OPENAI_IMAGE_BYTES = 5 * 1024 * 1024
 MIN_OPENAI_RASTER_DIMENSION = 48
 MAX_OPENAI_RASTER_DIMENSION = 4096
@@ -165,7 +166,8 @@ def main() -> None:
 
     codex_manifest = read_json("plugins/codex/alignbase/.codex-plugin/plugin.json")
     assert codex_manifest["name"] == "alignbase"
-    assert codex_manifest["mcpServers"] == "./.mcp.json"
+    assert codex_manifest["apps"] == "./.app.json"
+    assert "mcpServers" not in codex_manifest
     assert "hooks" not in codex_manifest
     assert codex_manifest["interface"]["defaultPrompt"] == [
         "Load the Alignbase context assigned to this agent.",
@@ -177,14 +179,16 @@ def main() -> None:
     assert codex_manifest["interface"]["composerIcon"] == codex_logo
     assert_png_logo("plugins/codex/alignbase/assets/alignbase-logo.png")
     assert_svg_logo("plugins/codex/alignbase/assets/alignbase-logo.svg")
-    codex_mcp = read_json("plugins/codex/alignbase/.mcp.json")
-    assert set(codex_mcp) == {"mcpServers"}
-    assert set(codex_mcp["mcpServers"]) == {"alignbase"}
-    assert_mcp_server("plugins/codex/alignbase/.mcp.json")
-    codex_server = codex_mcp["mcpServers"]["alignbase"]
-    assert set(codex_server) == {"type", "url", "oauth_resource"}
-    assert codex_server["type"] == "http"
-    assert codex_server["oauth_resource"] == MCP_URL
+    codex_apps = read_json("plugins/codex/alignbase/.app.json")
+    assert codex_apps == {
+        "apps": {
+            "alignbase": {
+                "id": OPENAI_APP_ID,
+                "required": True,
+            }
+        }
+    }
+    assert not (ROOT / "plugins/codex/alignbase/.mcp.json").exists()
 
     codex_hooks = read_json("plugins/codex/alignbase/hooks/hooks.json")
     codex_hook = codex_hooks["hooks"]["SessionStart"][0]["hooks"][0]

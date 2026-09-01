@@ -1,10 +1,12 @@
 # Alignbase plugin submission sheet
 
-Reviewed against the public store documentation on July 30, 2026.
+Reviewed against the public store documentation on September 1, 2026.
 
 ## Submission status
 
-The three packages have store-native manifests, dynamic OAuth configuration, the same 400 by 400 Alignbase logo with a blue background, and public source paths in this repository. Codex uses the PNG from its `interface` metadata, and Cursor uses the repo-relative SVG from both its marketplace entry and plugin manifest. Claude's plugin manifest and marketplace schema do not support a logo field, and the current plugin submission form does not ask for one. Anthropic stores the icon as separate directory-listing metadata after publication.
+The four packages have store-native manifests, dynamic OAuth configuration, the same 400 by 400 Alignbase logo with a blue background, and public source paths in this repository. Codex uses the PNG from its `interface` metadata, and Cursor uses the repo-relative SVG from both its marketplace entry and plugin manifest. Claude's plugin manifest and marketplace schema do not support a logo field, and the current plugin submission form does not ask for one. Anthropic stores the icon as separate directory-listing metadata after publication.
+
+The Alignbase OpenAI app submission, `asdk_app_6a6bd5435cc08191846e6a069bddcb16`, is pending review. The ChatGPT and Codex plugin references that app as required. Codex also loads the package's startup hooks, while ChatGPT uses the app without those hooks.
 
 The public terms, privacy, and support pages were verified on July 30, 2026. Do not make the final policy attestations yet. These items remain open:
 
@@ -44,7 +46,7 @@ The metadata does not claim an endorsement, compare Alignbase with another produ
 
 ## OpenAI universal plugin directory
 
-One approved submission is published to the universal directory shared by ChatGPT and Codex.
+One submitted app is pending review for the universal directory shared by ChatGPT and Codex.
 
 ### Official links
 
@@ -82,7 +84,7 @@ One approved submission is published to the universal directory shared by ChatGP
 | Countries and regions | Select only markets covered by Alignbase's terms, privacy policy, support, and export review |
 | Release notes | Initial submission of Alignbase. Loads approved context and Skills assigned to an agent and provides permission-scoped MCP tools for reading, drafting, writing, and publishing Alignbase context. OAuth uses dynamic client registration and PKCE. No UI is included. |
 
-The package manifest is `plugins/codex/alignbase/.codex-plugin/plugin.json`. It points to `.mcp.json` and the square PNG, while Codex discovers the startup hook from the package's standard `hooks/hooks.json` path. The listing logo and composer icon use the same blue-background asset. The public universal directory also has its own logo upload in the OpenAI submission form.
+The package manifest is `plugins/codex/alignbase/.codex-plugin/plugin.json`. It points to `.app.json` and the square PNG. The app reference uses `asdk_app_6a6bd5435cc08191846e6a069bddcb16` with `required: true`, so installing the plugin also requires the Alignbase app. Codex discovers the startup hook from the package's standard `hooks/hooks.json` path. ChatGPT does not run those Codex hooks. The listing logo and composer icon use the same blue-background asset. The public universal directory also has its own logo upload in the OpenAI submission form.
 
 ### Starter prompts
 

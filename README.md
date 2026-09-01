@@ -11,7 +11,7 @@ codex plugin marketplace add Alignbase/alignbase-marketplace &&
 codex plugin add alignbase@alignbase
 ```
 
-Enable the plugin, connect the Alignbase MCP server when prompted, and sign in to Alignbase. In Codex, approve the startup hook and begin a new session.
+Enable the plugin, connect the required Alignbase app when prompted, and sign in to Alignbase. In Codex, approve the startup hook and begin a new session.
 
 ## Claude
 

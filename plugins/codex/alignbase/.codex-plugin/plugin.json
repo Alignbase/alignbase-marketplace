@@ -1,6 +1,6 @@
 {
   "name": "alignbase",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Load your team's approved Alignbase context and Skills at session start.",
   "author": {
     "name": "Alignbase",
@@ -11,7 +11,7 @@
   "repository": "https://github.com/Alignbase/alignbase-marketplace",
   "license": "MIT",
   "keywords": ["agents", "context", "governance", "mcp"],
-  "mcpServers": "./.mcp.json",
+  "apps": "./.app.json",
   "interface": {
     "displayName": "Alignbase",
     "shortDescription": "Your team's approved context.",

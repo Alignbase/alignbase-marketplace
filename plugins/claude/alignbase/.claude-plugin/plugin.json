@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "alignbase",
   "displayName": "Alignbase",
-  "version": "1.0.13",
-  "description": "Load your team's approved Alignbase context and Skills at session start.",
+  "version": "1.1.0",
+  "description": "Load approved Alignbase context and record agent activity with native hooks.",
   "author": {
     "name": "Alignbase",
     "email": "support@alignbase.ai",

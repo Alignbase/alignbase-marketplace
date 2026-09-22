@@ -1,7 +1,7 @@
 {
   "name": "alignbase",
-  "version": "1.0.13",
-  "description": "Load your team's approved Alignbase context and Skills at session start.",
+  "version": "1.1.0",
+  "description": "Load approved Alignbase context and record agent activity with native hooks.",
   "author": {
     "name": "Alignbase",
     "email": "support@alignbase.ai",
@@ -15,10 +15,10 @@
   "interface": {
     "displayName": "Alignbase",
     "shortDescription": "Your team's approved context.",
-    "longDescription": "Connect ChatGPT and Codex to the context and Skills assigned to the current agent in Alignbase. MCP tools load or manage Alignbase context when the agent has permission. In Codex, a user-approved startup hook loads context when a session starts.",
+    "longDescription": "Connect ChatGPT and Codex to the context and Skills assigned to the current agent in Alignbase. MCP tools load or manage Alignbase context when the agent has permission. In Codex, user-approved lifecycle hooks load context and report turns and subagent relationships through the authenticated Alignbase app.",
     "developerName": "Alignbase",
     "category": "Productivity",
-    "capabilities": ["Read context", "Manage context", "Session startup"],
+    "capabilities": ["Read context", "Manage context", "Session startup", "Activity reporting", "Subagent lineage"],
     "websiteURL": "https://alignbase.ai",
     "privacyPolicyURL": "https://alignbase.ai/privacy/",
     "termsOfServiceURL": "https://alignbase.ai/terms/",

@@ -191,9 +191,29 @@ def main() -> None:
     assert not (ROOT / "plugins/codex/alignbase/.mcp.json").exists()
 
     codex_hooks = read_json("plugins/codex/alignbase/hooks/hooks.json")
-    codex_hook = codex_hooks["hooks"]["SessionStart"][0]["hooks"][0]
-    assert codex_hook["command"] == '"$PLUGIN_ROOT/scripts/session-start.sh"'
-    assert "PLUGIN_ROOT" in codex_hook["commandWindows"]
+    codex_lifecycle_hooks = codex_hooks["hooks"]
+    codex_session_hooks = codex_lifecycle_hooks["SessionStart"][0]["hooks"]
+    codex_start_hook = codex_session_hooks[0]
+    assert codex_start_hook["type"] == "mcp_tool"
+    assert codex_start_hook["server"] == "alignbase"
+    assert codex_start_hook["server"] in codex_apps["apps"]
+    assert codex_start_hook["tool"] == "start_hook_session"
+    assert codex_start_hook["input"]["adapter_version"] == codex_manifest["version"]
+    codex_command_hook = codex_session_hooks[1]
+    assert codex_command_hook["command"] == '"$PLUGIN_ROOT/scripts/session-start.sh"'
+    assert "PLUGIN_ROOT" in codex_command_hook["commandWindows"]
+    assert set(codex_lifecycle_hooks) == {
+        "SessionStart",
+        "UserPromptSubmit",
+        "Stop",
+        "SubagentStart",
+        "SubagentStop",
+    }
+    for event_handlers in codex_lifecycle_hooks.values():
+        for event_handler in event_handlers:
+            for hook in event_handler["hooks"]:
+                if hook["type"] == "mcp_tool":
+                    assert hook["server"] in codex_apps["apps"]
 
     hook_output = subprocess.run(
         ["sh", str(ROOT / "plugins/codex/alignbase/scripts/session-start.sh")],
@@ -285,13 +305,27 @@ def main() -> None:
         assert_no_fixed_oauth_config(plugin_root)
 
     claude_hooks = read_json("plugins/claude/alignbase/hooks/hooks.json")
-    claude_hook = claude_hooks["hooks"]["SessionStart"][0]["hooks"][0]
-    assert claude_hook == {
+    claude_lifecycle_hooks = claude_hooks["hooks"]
+    assert claude_lifecycle_hooks["SessionStart"][0]["matcher"] == "startup|resume|clear|compact|fork"
+    claude_session_hooks = claude_lifecycle_hooks["SessionStart"][0]["hooks"]
+    claude_start_hook = claude_session_hooks[0]
+    assert claude_start_hook["type"] == "mcp_tool"
+    assert claude_start_hook["server"] == "plugin:alignbase:alignbase"
+    assert claude_start_hook["tool"] == "start_hook_session"
+    assert claude_start_hook["input"]["adapter_version"] == claude_manifest["version"]
+    assert claude_session_hooks[1] == {
         "type": "command",
-        "command": "node",
-        "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/session-start.mjs"],
+        "command": 'node "${CLAUDE_PLUGIN_ROOT}/scripts/session-start.mjs"',
         "timeout": 10,
     }
+    assert set(claude_lifecycle_hooks) == {
+        "SessionStart",
+        "UserPromptSubmit",
+        "Stop",
+        "SubagentStart",
+        "SubagentStop",
+    }
+    assert claude_lifecycle_hooks["UserPromptSubmit"][0]["hooks"][0]["tool"] == "start_hook_session"
     claude_hook_output = subprocess.run(
         ["node", str(ROOT / "plugins/claude/alignbase/scripts/session-start.mjs")],
         check=True,

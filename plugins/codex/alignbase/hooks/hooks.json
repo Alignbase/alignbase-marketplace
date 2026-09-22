@@ -1,19 +1,24 @@
 {
-  "description": "Load Alignbase context when a Codex session starts.",
+  "description": "Load Alignbase context and report Codex activity through authenticated lifecycle hooks.",
   "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "startup|resume|clear|compact",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$PLUGIN_ROOT/scripts/session-start.sh\"",
-            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:PLUGIN_ROOT\\scripts\\session-start.ps1\"",
-            "timeout": 10,
-            "statusMessage": "Checking Alignbase startup"
-          }
-        ]
-      }
-    ]
+    "SessionStart": [{
+      "matcher": "startup|resume|clear|compact",
+      "hooks": [
+      {"type":"mcp_tool","server":"alignbase","tool":"start_hook_session","input":{"integration":"codex","adapter_version":"1.1.0","capabilities":["context_session_start","prompt_submit","final_response","subagent_lifecycle"],"session_id":"${session_id}","delivery_point":"session_start"},"timeout":30,"statusMessage":"Loading Alignbase context"},
+        {"type":"command","command":"\"$PLUGIN_ROOT/scripts/session-start.sh\"","commandWindows":"powershell -NoProfile -ExecutionPolicy Bypass -File \"$env:PLUGIN_ROOT\\scripts\\session-start.ps1\"","timeout":10,"statusMessage":"Checking Alignbase startup"}
+      ]
+    }],
+    "UserPromptSubmit": [{"hooks":[
+      {"type":"mcp_tool","server":"alignbase","tool":"record_hook_activity_event","input":{"integration":"codex","adapter_version":"1.1.0","capabilities":["context_session_start","prompt_submit","final_response","subagent_lifecycle"],"event":{"schema_version":"1","event_type":"prompt.submitted","session_id":"${session_id}","turn_id":"${turn_id}","source":"user_prompt_submit","completeness":"complete","prompt_text":"${prompt}"}},"timeout":30,"statusMessage":"Recording Alignbase activity"}
+    ]}],
+    "Stop": [{"hooks":[
+      {"type":"mcp_tool","server":"alignbase","tool":"record_hook_activity_event","input":{"integration":"codex","adapter_version":"1.1.0","capabilities":["context_session_start","prompt_submit","final_response","subagent_lifecycle"],"event":{"schema_version":"1","event_type":"response.final","session_id":"${session_id}","turn_id":"${turn_id}","source":"stop","completeness":"complete","response_text":"${last_assistant_message}"}},"timeout":30,"statusMessage":"Recording Alignbase activity"}
+    ]}],
+    "SubagentStart": [{"hooks":[
+      {"type":"mcp_tool","server":"alignbase","tool":"record_hook_activity_event","input":{"integration":"codex","adapter_version":"1.1.0","capabilities":["context_session_start","prompt_submit","final_response","subagent_lifecycle"],"event":{"schema_version":"1","event_type":"subagent.started","session_id":"${session_id}","turn_id":"${turn_id}","actor_id":"${agent_id}","actor_type":"${agent_type}","parent_session_id":"${session_id}","source":"subagent_start","completeness":"complete"}},"timeout":30,"statusMessage":"Recording Alignbase subagent"}
+    ]}],
+    "SubagentStop": [{"hooks":[
+      {"type":"mcp_tool","server":"alignbase","tool":"record_hook_activity_event","input":{"integration":"codex","adapter_version":"1.1.0","capabilities":["context_session_start","prompt_submit","final_response","subagent_lifecycle"],"event":{"schema_version":"1","event_type":"response.final","session_id":"${session_id}","turn_id":"${turn_id}","actor_id":"${agent_id}","actor_type":"${agent_type}","parent_session_id":"${session_id}","source":"subagent_stop","completeness":"complete","response_text":"${last_assistant_message}"}},"timeout":30,"statusMessage":"Recording Alignbase subagent"}
+    ]}]
   }
 }

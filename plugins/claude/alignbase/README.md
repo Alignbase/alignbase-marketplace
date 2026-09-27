@@ -10,6 +10,6 @@ Try these requests after connecting an agent that has sample Knowledge and Skill
 
 1. "Show the current Alignbase context assigned to this agent."
 2. "List the Alignbase Skills available to this agent."
-3. "Read the published release-check Skill from Alignbase."
+3. "Read the published reviewer-sample Skill from Alignbase."
 
 Support: <https://alignbase.ai/support/>. Privacy: <https://alignbase.ai/privacy/>. Terms: <https://alignbase.ai/terms/>.

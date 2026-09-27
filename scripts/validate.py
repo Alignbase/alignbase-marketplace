@@ -313,11 +313,7 @@ def main() -> None:
     assert claude_start_hook["server"] == "plugin:alignbase:alignbase"
     assert claude_start_hook["tool"] == "start_hook_session"
     assert claude_start_hook["input"]["adapter_version"] == claude_manifest["version"]
-    assert claude_session_hooks[1] == {
-        "type": "command",
-        "command": 'node "${CLAUDE_PLUGIN_ROOT}/scripts/session-start.mjs"',
-        "timeout": 10,
-    }
+    assert len(claude_session_hooks) == 1
     assert set(claude_lifecycle_hooks) == {
         "SessionStart",
         "UserPromptSubmit",
@@ -326,19 +322,7 @@ def main() -> None:
         "SubagentStop",
     }
     assert claude_lifecycle_hooks["UserPromptSubmit"][0]["hooks"][0]["tool"] == "start_hook_session"
-    claude_hook_output = subprocess.run(
-        ["node", str(ROOT / "plugins/claude/alignbase/scripts/session-start.mjs")],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout
-    claude_response = json.loads(claude_hook_output)
-    claude_context = claude_response["hookSpecificOutput"]
-    assert claude_context["hookEventName"] == "SessionStart"
-    assert "get_current_context" in claude_context["additionalContext"]
-    assert "ask whether they want to continue without it" in claude_context["additionalContext"]
-    assert "until they confirm" in claude_context["additionalContext"]
-    assert "then continue" not in claude_context["additionalContext"]
+    assert not (ROOT / "plugins/claude/alignbase/scripts/session-start.mjs").exists()
 
     cursor_hooks = read_json("plugins/cursor/alignbase/hooks/hooks.json")
     cursor_command = cursor_hooks["hooks"]["sessionStart"][0]["command"]

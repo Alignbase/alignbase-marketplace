@@ -4,8 +4,7 @@
     "SessionStart": [{
       "matcher": "startup|resume|clear|compact|fork",
       "hooks": [
-        {"type":"mcp_tool","server":"plugin:alignbase:alignbase","tool":"start_hook_session","input":{"integration":"claude","adapter_version":"1.1.0","capabilities":["context_session_start","context_prompt_retry","prompt_submit","final_response","subagent_lifecycle"],"session_id":"${session_id}","delivery_point":"session_start"},"timeout":30,"statusMessage":"Loading Alignbase context"},
-        {"type":"command","command":"node \"${CLAUDE_PLUGIN_ROOT}/scripts/session-start.mjs\"","timeout":10}
+        {"type":"mcp_tool","server":"plugin:alignbase:alignbase","tool":"start_hook_session","input":{"integration":"claude","adapter_version":"1.1.0","capabilities":["context_session_start","context_prompt_retry","prompt_submit","final_response","subagent_lifecycle"],"session_id":"${session_id}","delivery_point":"session_start"},"timeout":30,"statusMessage":"Loading Alignbase context"}
       ]
     }],
     "UserPromptSubmit": [{"hooks":[

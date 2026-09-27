@@ -195,7 +195,7 @@ Starter prompts:
 
 Section 2F of the Directory Policy says that instructional software must not direct Claude to dynamically pull behavioral instructions from external sources for Claude to execute. Alignbase's startup hooks request workspace-assigned context. The submission must describe this behavior accurately so Anthropic can review it. The same applies to activity hooks: they send submitted prompts and final responses to Alignbase when Activity is enabled. Do not claim the plugin only reads static reference data or omits conversation content.
 
-The portal reviews each Git commit and may hold a version for a reviewer. The current JavaScript startup script causes a reviewer hold because the automated validator does not follow non-shell scripts inside a plugin subfolder. A hold can still be submitted. The manifest provides the icon, privacy policy, terms, support, and documentation links.
+The portal reviews each Git commit. The Claude plugin uses declared MCP hooks and does not run a local startup script, so the automated validator no longer places a script policy hold. The manifest provides the icon, privacy policy, terms, support, and documentation links.
 
 ### Submission steps
 

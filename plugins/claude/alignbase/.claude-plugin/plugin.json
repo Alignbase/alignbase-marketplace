@@ -11,6 +11,11 @@
   },
   "homepage": "https://alignbase.ai",
   "repository": "https://github.com/Alignbase/alignbase-marketplace",
+  "icon": "./assets/alignbase-logo.svg",
+  "privacyPolicyUrl": "https://alignbase.ai/privacy/",
+  "termsOfServiceUrl": "https://alignbase.ai/terms/",
+  "supportUrl": "https://alignbase.ai/support/",
+  "documentationUrl": "https://github.com/Alignbase/alignbase-marketplace/tree/main/plugins/claude/alignbase#readme",
   "license": "MIT",
   "keywords": ["agents", "context", "governance", "mcp"]
 }

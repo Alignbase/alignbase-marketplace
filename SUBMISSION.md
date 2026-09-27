@@ -1,18 +1,14 @@
 # Alignbase plugin submission sheet
 
-Reviewed against the public store documentation on September 1, 2026.
+Reviewed against the public store documentation on September 27, 2026.
 
 ## Submission status
 
-The four packages have store-native manifests, dynamic OAuth configuration, the same 400 by 400 Alignbase logo with a blue background, and public source paths in this repository. Codex uses the PNG from its `interface` metadata, and Cursor uses the repo-relative SVG from both its marketplace entry and plugin manifest. Claude's plugin manifest and marketplace schema do not support a logo field, and the current plugin submission form does not ask for one. Anthropic stores the icon as separate directory-listing metadata after publication.
+The four packages have store-native manifests, dynamic OAuth configuration, the same 400 by 400 Alignbase logo with a blue background, and public source paths in this repository. Codex uses the PNG from its `interface` metadata, and Cursor uses the repo-relative SVG from both its marketplace entry and plugin manifest. Claude's directory submission reads the SVG icon and policy links from the plugin manifest.
 
 The Alignbase OpenAI app submission, `asdk_app_6a6bd5435cc08191846e6a069bddcb16`, is pending review. The ChatGPT and Codex plugin references that app as required. Codex also loads the package's startup hooks, while ChatGPT uses the app without those hooks.
 
-The public terms, privacy, and support pages were verified on July 30, 2026. Do not make the final policy attestations yet. These items remain open:
-
-1. Anthropic's Software Directory Policy section 2F bars instructional software from dynamically pulling behavioral instructions from an external source for Claude to execute. Alignbase's startup context is that exact product behavior. Get written approval from Anthropic or ship a Claude-specific design that does not pull behavioral instructions before submitting.
-2. Create a reviewer account with sample context and Skills. OpenAI requires credentials that work without MFA, SMS, email confirmation, or a private network. Anthropic also requires a standard test account with sample data.
-3. OpenAI generates the domain verification token during submission. Deploy that exact token at `https://app.alignbase.ai/.well-known/openai-apps-challenge` before the final tool scan.
+The public terms, privacy, and support pages were checked again on September 27, 2026. The Claude developer portal accepted the public plugin source in its initial validation. Before submission, connect GitHub to the submitting Claude organization, verify the existing sample-data reviewer account, and complete the policy acknowledgements with an authorized company representative. Section 2F warrants a transparent description of the startup context behavior for Anthropic's review.
 
 The metadata does not claim an endorsement, compare Alignbase with another product, hide paid actions, or promise unsupported features. The plugins contain no API keys, fixed OAuth client IDs, passwords, or telemetry configuration.
 
@@ -21,7 +17,7 @@ The metadata does not claim an endorsement, compare Alignbase with another produ
 | Host | Supported path |
 | --- | --- |
 | OpenAI | Codex package cards and composer surfaces read `interface.logo` and `interface.composerIcon` from `.codex-plugin/plugin.json`. Both paths start with `./` and point to the 400 by 400 PNG inside the plugin. OpenAI accepts square PNG, JPEG, WebP, or SVG files up to 5 MiB. Raster images must be between 48 by 48 and 4,096 by 4,096 pixels. Our PNG is 88,013 bytes, decodes as 8-bit RGBA, and is comfortably inside every limit. |
-| Claude | Claude's plugin manifest schema and marketplace schema have no logo field. Adding one produces an unrecognized-field warning and fails `--strict` validation. The current plugin submission form also has no image field. After publication, set the directory icon in **Admin settings > Directory > Submissions**. The bundled 400 by 400 PNG is prepared for that listing edit, but it does not control the card by itself. |
+| Claude | The directory portal accepts a square icon of at least 128 by 128 pixels. The plugin manifest points to the bundled 400 by 400 SVG. The same logo is available as a PNG. |
 | Cursor | Cursor reads `logo` as a repo-relative path or an absolute URL and recommends committing the file to the repository. Cursor does not publish size, aspect-ratio, or file-size limits. The catalog and plugin manifest both point to a valid, self-contained 400 by 400 SVG, which matches Cursor's documented `assets/logo.svg` example. |
 
 ## Shared production details
@@ -164,8 +160,8 @@ The same Claude directory listing is available in Cowork and Claude Code. In Cla
 ### Official links
 
 - Submission guide: <https://claude.com/docs/plugins/submit>
-- Claude.ai submission form: <https://claude.ai/admin-settings/directory/submissions/plugins/new>
-- Console submission form: <https://platform.claude.com/plugins/submit>
+- Developer portal: <https://claude.ai/directory/manage>
+- Pre-submission checklist: <https://claude.com/docs/plugins/pre-submission-checklist>
 - Plugin reference: <https://code.claude.com/docs/en/plugins-reference>
 - Directory policy: <https://support.claude.com/en/articles/13145358-anthropic-software-directory-policy>
 - Directory terms: <https://support.claude.com/en/articles/13145338-anthropic-software-directory-terms>
@@ -184,7 +180,7 @@ The same Claude directory listing is available in Cowork and Claude Code. In Cla
 | Privacy policy | `https://alignbase.ai/privacy/` |
 | Terms | `https://alignbase.ai/terms/` |
 | Support | `https://alignbase.ai/support/` |
-| Logo | The plugin form has no image field. After publication, set the listing icon in **Admin settings > Directory > Submissions** using `plugins/claude/alignbase/assets/alignbase-logo.png`. |
+| Logo | The plugin manifest's `icon` field points to `assets/alignbase-logo.svg`, a square 400 by 400 image. |
 | Test account | Add the reviewer account after it is created |
 | MCP endpoint | `https://app.alignbase.ai/mcp` |
 | Example prompts | Use the first three starter prompts below |
@@ -193,26 +189,23 @@ Starter prompts:
 
 1. Load the Alignbase context assigned to this agent.
 2. List the Alignbase Skills available to this agent.
-3. Show me the context alignments this agent can read and which ones it can edit.
+3. Show me the Knowledge this agent can read and which items it can edit.
 
-### Policy decision required
+### Policy and review
 
-Do not submit the current Claude package until Anthropic answers the section 2F issue in writing. The package's session hook asks Claude to call `get_current_context`, and that tool returns externally managed behavioral instructions for Claude to follow. Anthropic's current Directory Policy prohibits that behavior for instructional software.
+Section 2F of the Directory Policy says that instructional software must not direct Claude to dynamically pull behavioral instructions from external sources for Claude to execute. Alignbase's startup hooks request workspace-assigned context. The submission must describe this behavior accurately so Anthropic can review it. The same applies to activity hooks: they send submitted prompts and final responses to Alignbase when Activity is enabled. Do not claim the plugin only reads static reference data or omits conversation content.
 
-Removing the hook alone does not fully resolve the issue because the MCP tool still returns behavioral instructions. A compliant alternative would need Anthropic's approval or a Claude-specific mode that returns reference material without asking Claude to execute it as behavioral guidance. That would change the product behavior, so it should be a product decision.
+The portal reviews each Git commit and may hold a version for a reviewer. The current JavaScript startup script causes a reviewer hold because the automated validator does not follow non-shell scripts inside a plugin subfolder. A hold can still be submitted. The manifest provides the icon, privacy policy, terms, support, and documentation links.
 
-Apart from section 2F, the package now uses the current manifest schema, has narrow package copy, contains no fixed OAuth client ID, and uses the production OAuth discovery flow. The remote MCP server uses Streamable HTTP, secure OAuth 2.0, and tool annotations. Claude's manifest and marketplace schemas have no logo field. The directory listing icon must be set as listing metadata after publication. The privacy policy and support page are public. A reviewer account and at least three examples are still required.
+### Submission steps
 
-### Submission steps after policy approval
-
-1. Create the reviewer account.
-2. Run `claude plugin validate plugins/claude/alignbase --strict`.
+1. Confirm the reviewer account has sample data and working access.
+2. Run `claude plugin validate plugins/claude/alignbase --strict` and `python3 scripts/validate.py`.
 3. Test the plugin from the public GitHub source in a new Cowork session and a new Claude Code session.
-4. Use the Claude.ai form if the submitter belongs to a Team or Enterprise organization and has directory management access. Otherwise use the Console form with a Developer, Admin, or Owner role.
-5. Submit the public plugin subdirectory URL, listing fields, reviewer account, and three examples.
-6. Accept the Directory Terms only after the section 2F question and privacy review are resolved.
-7. After publication, open **Admin settings > Directory > Submissions** and set the listing icon to the prepared 400 by 400 PNG.
-8. Push reviewed plugin updates to GitHub. Anthropic mirrors repository updates and runs automated screening, so the form does not need to be submitted again for each update.
+4. Connect a GitHub account with push access to the public repository in the submitting Claude organization. The portal checks this before it saves or submits the listing.
+5. In the developer portal, submit the plugin folder and the remote MCP server as separate entries. Validate again after each source change.
+6. Answer the data-handling questions and review the Directory Terms and Policy with the person authorized to accept them for the organization.
+7. Submit the plugin for review. Track the scan and reviewer feedback in the portal. Once approved, request publication there.
 
 ## Cursor Marketplace
 

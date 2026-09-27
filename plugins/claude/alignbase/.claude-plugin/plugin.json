@@ -3,7 +3,7 @@
   "name": "alignbase",
   "displayName": "Alignbase",
   "version": "1.1.0",
-  "description": "Load approved Alignbase context and record agent activity with native hooks.",
+  "description": "Access workspace-approved Knowledge, Skills, and Memory from Alignbase.",
   "author": {
     "name": "Alignbase",
     "email": "support@alignbase.ai",

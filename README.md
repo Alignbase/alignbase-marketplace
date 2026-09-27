@@ -61,6 +61,8 @@ Do not install this package in Grok Bot. Add `https://app.alignbase.ai/mcp` to G
 
 Keep all four plugin manifest versions and all marketplace metadata versions in sync. Bump them before publishing a plugin update because hosts cache installed plugin versions.
 
+The Alignbase webapp also embeds download ZIPs from `app/internal/pluginbundle/assets` in the private `Alignbase/alignbase` repository. For Claude, ChatGPT/Codex, and Cursor, keep each current embedded package byte-for-byte equal to the matching `plugins/<host>/alignbase` directory here, including hidden files and images. Update the `packageSpecs` version in `app/internal/pluginbundle/bundle.go` whenever a manifest version changes. Publish this repository first, then ship the matching webapp bundle and check `/plugins/claude/download`, `/plugins/chatgpt/download`, and `/plugins/cursor/download`. The webapp's `app/internal/pluginbundle/README.md` has the asset paths and verification steps.
+
 Run the local checks before pushing:
 
 ```sh

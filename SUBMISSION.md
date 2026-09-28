@@ -203,7 +203,7 @@ The portal reviews each Git commit. The Claude plugin uses declared MCP hooks an
 2. Run `claude plugin validate plugins/claude/alignbase --strict` and `python3 scripts/validate.py`.
 3. Test the plugin from the public GitHub source in a new Cowork session and a new Claude Code session.
 4. Connect a GitHub account with push access to the public repository in the submitting Claude organization. The portal checks this before it saves or submits the listing.
-5. In the developer portal, submit the plugin folder and the remote MCP server as separate entries. Validate again after each source change.
+5. In the developer portal, submit the plugin bundle from this repository. It already includes the remote MCP server configuration. A standalone connector is a separate, optional listing, not a prerequisite for the plugin bundle. Validate again after each source change.
 6. Answer the data-handling questions and review the Directory Terms and Policy with the person authorized to accept them for the organization.
 7. Submit the plugin for review. Track the scan and reviewer feedback in the portal. Once approved, request publication there.
 

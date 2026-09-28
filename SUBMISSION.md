@@ -181,7 +181,7 @@ The same Claude directory listing is available in Cowork and Claude Code. In Cla
 | Terms | `https://alignbase.ai/terms/` |
 | Support | `https://alignbase.ai/support/` |
 | Logo | The plugin manifest's `icon` field points to `assets/alignbase-logo.svg`, a square 400 by 400 image. |
-| Test account | Add the reviewer account after it is created |
+| Test account | `tester@alignbase.ai`; keep its password only in the portal's private reviewer field |
 | MCP endpoint | `https://app.alignbase.ai/mcp` |
 | Example prompts | Use the first three starter prompts below |
 
@@ -196,6 +196,8 @@ Starter prompts:
 Section 2F of the Directory Policy says that instructional software must not direct Claude to dynamically pull behavioral instructions from external sources for Claude to execute. Alignbase's startup hooks request workspace-assigned context. The submission must describe this behavior accurately so Anthropic can review it. The same applies to activity hooks: they send submitted prompts and final responses to Alignbase when Activity is enabled. Do not claim the plugin only reads static reference data or omits conversation content.
 
 The portal reviews each Git commit. The Claude plugin uses declared MCP hooks and does not run a local startup script, so the automated validator no longer places a script policy hold. The manifest provides the icon, privacy policy, terms, support, and documentation links.
+
+The Source validator may warn that `icon`, `documentationUrl`, `privacyPolicyUrl`, `supportUrl`, and `termsOfServiceUrl` are unknown to Claude Code. The portal says it reads those fields for the directory listing and that no action is needed. Keep them in the manifest so the listing retains its logo and public links. Check each new validation report for other warnings; a passing scan alone does not explain them.
 
 ### Submission steps
 

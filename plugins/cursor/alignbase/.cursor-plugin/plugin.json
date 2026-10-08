@@ -1,12 +1,12 @@
 {
   "name": "alignbase",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Load your team's approved Alignbase context and Skills at session start.",
   "author": {
     "name": "Alignbase",
-    "email": "support@alignbase.ai"
+    "email": "support@alignbase.com"
   },
-  "homepage": "https://alignbase.ai",
+  "homepage": "https://alignbase.com",
   "repository": "https://github.com/Alignbase/alignbase-marketplace",
   "license": "MIT",
   "keywords": ["agents", "context", "governance", "mcp"],

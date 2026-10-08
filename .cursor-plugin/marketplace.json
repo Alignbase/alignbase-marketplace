@@ -2,11 +2,11 @@
   "name": "alignbase",
   "owner": {
     "name": "Alignbase",
-    "email": "support@alignbase.ai"
+    "email": "support@alignbase.com"
   },
   "metadata": {
     "description": "The official Alignbase plugin marketplace.",
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "plugins": [
     {

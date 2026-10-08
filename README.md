@@ -31,6 +31,9 @@ claude
 
 Connect the Alignbase MCP server when prompted, sign in, and start a new Cowork or Claude Code session.
 
+Version 1.2.0 uses `https://app.alignbase.com/mcp`. Existing plugin installs
+using `https://app.alignbase.ai/mcp` continue to work while teams upgrade.
+
 ## Cursor
 
 The Cursor package is in `plugins/cursor/alignbase`. Install it from Cursor Marketplace after publication, or test it as a local plugin before submission.
@@ -44,7 +47,7 @@ grok plugin install alignbase --trust
 
 Connect the Alignbase MCP server when prompted and sign in. Grok Build's current session-start hooks cannot add instructions to a conversation, so follow the plugin README to add the required startup instruction to `~/.grok/AGENTS.md` before beginning a new session.
 
-Do not install this package in Grok Bot. Add `https://app.alignbase.ai/mcp` to Grok Bot as a Streamable HTTP connector and complete browser sign-in.
+Do not install this package in Grok Bot. Add `https://app.alignbase.com/mcp` to Grok Bot as a Streamable HTTP connector and complete browser sign-in.
 
 ## Repository layout
 

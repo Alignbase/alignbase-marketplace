@@ -6,7 +6,7 @@ Reviewed against the public store documentation on September 27, 2026.
 
 The four packages have store-native manifests, dynamic OAuth configuration, the same 400 by 400 Alignbase logo with a blue background, and public source paths in this repository. Codex uses the PNG from its `interface` metadata, and Cursor uses the repo-relative SVG from both its marketplace entry and plugin manifest. Claude's directory submission reads the SVG icon and policy links from the plugin manifest.
 
-The Alignbase OpenAI app submission, `asdk_app_6a6bd5435cc08191846e6a069bddcb16`, is pending review. The ChatGPT and Codex plugin references that app as required. Codex also loads the package's startup hooks, while ChatGPT uses the app without those hooks.
+The Alignbase OpenAI app submission, `asdk_app_6ac6fb6d7d908191a720e44866608dca`, is pending review. The ChatGPT and Codex plugin references that app as required. Codex also loads the package's startup hooks, while ChatGPT uses the app without those hooks.
 
 The public terms, privacy, and support pages were checked again on September 27, 2026. The Claude developer portal accepted the public plugin source in its initial validation. Before submission, connect GitHub to the submitting Claude organization, verify the existing sample-data reviewer account, and complete the policy acknowledgements with an authorized company representative. Section 2F warrants a transparent description of the startup context behavior for Anthropic's review.
 
@@ -26,19 +26,19 @@ The metadata does not claim an endorsement, compare Alignbase with another produ
 | --- | --- |
 | Product name | Alignbase |
 | Developer | Alignbase |
-| Contact email | `support@alignbase.ai` |
-| Website | `https://alignbase.ai` |
+| Contact email | `support@alignbase.com` |
+| Website | `https://alignbase.com` |
 | Repository | `https://github.com/Alignbase/alignbase-marketplace` |
-| MCP server | `https://app.alignbase.ai/mcp` |
+| MCP server | `https://app.alignbase.com/mcp` |
 | Authentication | OAuth 2.0 authorization code flow with PKCE and dynamic client registration |
 | OAuth scopes | `context.read`, `context.write` |
 | Short description | Your team's approved context. |
 | Package description | Load your team's approved Alignbase context and Skills at session start. |
 | Listing category | Productivity |
 | Logo | `assets/alignbase-logo.png`, 400 by 400 PNG, white Alignbase mark on a blue background. Cursor also includes the equivalent SVG. |
-| Support URL | `https://alignbase.ai/support/` |
-| Privacy policy URL | `https://alignbase.ai/privacy/` |
-| Terms URL | `https://alignbase.ai/terms/` |
+| Support URL | `https://alignbase.com/support/` |
+| Privacy policy URL | `https://alignbase.com/privacy/` |
+| Terms URL | `https://alignbase.com/terms/` |
 
 ## OpenAI universal plugin directory
 
@@ -67,20 +67,20 @@ One submitted app is pending review for the universal directory shared by ChatGP
 | Developer Identity | Select the verified Alignbase business identity |
 | Category | Productivity |
 | Logo | Upload `plugins/codex/alignbase/assets/alignbase-logo.png` |
-| Website | `https://alignbase.ai` |
-| Support URL | `https://alignbase.ai/support/` |
-| Privacy policy URL | `https://alignbase.ai/privacy/` |
-| Terms URL | `https://alignbase.ai/terms/` |
+| Website | `https://alignbase.com` |
+| Support URL | `https://alignbase.com/support/` |
+| Privacy policy URL | `https://alignbase.com/privacy/` |
+| Terms URL | `https://alignbase.com/terms/` |
 | Screenshots | None. The plugin has no UI, and OpenAI says not to submit screenshots for plugins without UI |
 | MCP URL type | Universal |
-| MCP server URL | `https://app.alignbase.ai/mcp` |
+| MCP server URL | `https://app.alignbase.com/mcp` |
 | Authentication | OAuth 2.0 |
 | Demo credentials | Add the reviewer account after it is created |
 | UI content security policy | Not applicable because the MCP server returns no UI |
 | Countries and regions | Select only markets covered by Alignbase's terms, privacy policy, support, and export review |
 | Release notes | Initial submission of Alignbase. Loads approved context and Skills assigned to an agent and provides permission-scoped MCP tools for reading, drafting, writing, and publishing Alignbase context. OAuth uses dynamic client registration and PKCE. No UI is included. |
 
-The package manifest is `plugins/codex/alignbase/.codex-plugin/plugin.json`. It points to `.app.json` and the square PNG. The app reference uses `asdk_app_6a6bd5435cc08191846e6a069bddcb16` with `required: true`, so installing the plugin also requires the Alignbase app. Codex discovers the startup hook from the package's standard `hooks/hooks.json` path. ChatGPT does not run those Codex hooks. The listing logo and composer icon use the same blue-background asset. The public universal directory also has its own logo upload in the OpenAI submission form.
+The package manifest is `plugins/codex/alignbase/.codex-plugin/plugin.json`. It points to `.app.json` and the square PNG. The app reference uses `asdk_app_6ac6fb6d7d908191a720e44866608dca` with `required: true`, so installing the plugin also requires the Alignbase app. Codex discovers the startup hook from the package's standard `hooks/hooks.json` path. ChatGPT does not run those Codex hooks. The listing logo and composer icon use the same blue-background asset. The public universal directory also has its own logo upload in the OpenAI submission form.
 
 ### Starter prompts
 
@@ -175,14 +175,14 @@ The same Claude directory listing is available in Cowork and Claude Code. In Cla
 | Name | Alignbase |
 | Description | Load your team's approved Alignbase context and Skills at session start. |
 | Developer | Alignbase |
-| Contact | `support@alignbase.ai` |
-| Homepage | `https://alignbase.ai` |
-| Privacy policy | `https://alignbase.ai/privacy/` |
-| Terms | `https://alignbase.ai/terms/` |
-| Support | `https://alignbase.ai/support/` |
+| Contact | `support@alignbase.com` |
+| Homepage | `https://alignbase.com` |
+| Privacy policy | `https://alignbase.com/privacy/` |
+| Terms | `https://alignbase.com/terms/` |
+| Support | `https://alignbase.com/support/` |
 | Logo | The plugin manifest's `icon` field points to `assets/alignbase-logo.svg`, a square 400 by 400 image. |
-| Test account | `tester@alignbase.ai`; keep its password only in the portal's private reviewer field |
-| MCP endpoint | `https://app.alignbase.ai/mcp` |
+| Test account | `tester@alignbase.com`; keep its password only in the portal's private reviewer field |
+| MCP endpoint | `https://app.alignbase.com/mcp` |
 | Example prompts | Use the first three starter prompts below |
 
 Starter prompts:
@@ -224,12 +224,12 @@ The Source validator may warn that `icon`, `documentationUrl`, `privacyPolicyUrl
 | --- | --- |
 | Organization name | Alignbase |
 | Organization handle | `alignbase` |
-| Contact email | `support@alignbase.ai` |
+| Contact email | `support@alignbase.com` |
 | Logotype URL | `https://raw.githubusercontent.com/Alignbase/alignbase-marketplace/main/plugins/cursor/alignbase/assets/alignbase-logo.svg` |
 | Organization description | Alignbase gives teams one place to manage and distribute approved context and Skills to their AI agents. |
 | GitHub repository | `https://github.com/Alignbase/alignbase-marketplace` |
 | Owner | Select the signed-in company account or team |
-| Website URL | `https://alignbase.ai` |
+| Website URL | `https://alignbase.com` |
 | Publisher Terms | Accept after the company approves the remaining license grant, indemnity, and data obligations |
 
 The repository-level Cursor catalog is `.cursor-plugin/marketplace.json`. Its `alignbase` entry points to `plugins/cursor/alignbase`, where `.cursor-plugin/plugin.json` declares the MCP server, hook, metadata, and relative logo.

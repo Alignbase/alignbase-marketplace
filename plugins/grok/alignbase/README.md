@@ -8,6 +8,6 @@ Grok's current session-start hooks cannot add instructions to the conversation, 
 
 The plugin loads the context and Skills assigned to the current agent. Read access works for every connected agent. Write and publish tools only work when the agent has the matching Alignbase permission.
 
-Use `/mcps` to inspect or reconnect the server. If setup fails, confirm that `https://app.alignbase.ai/mcp` is reachable and start a new session after reconnecting.
+Use `/mcps` to inspect or reconnect the server. If setup fails, confirm that `https://app.alignbase.com/mcp` is reachable and start a new session after reconnecting.
 
-Support: <https://alignbase.ai/support/>. Privacy: <https://alignbase.ai/privacy/>. Terms: <https://alignbase.ai/terms/>.
+Support: <https://alignbase.com/support/>. Privacy: <https://alignbase.com/privacy/>. Terms: <https://alignbase.com/terms/>.

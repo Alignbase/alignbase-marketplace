@@ -4,7 +4,7 @@ Reviewed against the public store documentation on September 27, 2026.
 
 ## Submission status
 
-The four packages have store-native manifests, dynamic OAuth configuration, the same 400 by 400 Alignbase logo with a blue background, and public source paths in this repository. Codex uses the PNG from its `interface` metadata, and Cursor uses the repo-relative SVG from both its marketplace entry and plugin manifest. Claude's directory submission reads the SVG icon and policy links from the plugin manifest.
+The four packages have store-native manifests, dynamic OAuth configuration, the same 400 by 400 Alignbase logo with a blue background, and public source paths in this repository. Codex uses the PNG from its `interface` metadata, and Cursor uses the repo-relative SVG from both its marketplace entry and plugin manifest. Claude's plugin manifest now points to a bundled 1024 by 1024 PNG and includes policy links. The existing Claude directory submission has the same PNG uploaded separately and waiting for review; listing fields captured at submission do not update from later source changes.
 
 The Alignbase OpenAI app submission, `asdk_app_6ac6fb6d7d908191a720e44866608dca`, is pending review. The repository plugin connects directly to the MCP endpoint with OAuth and does not reference the submission. It retains lifecycle hooks for supported hosts. Public directory submissions cannot include lifecycle hooks.
 
@@ -17,7 +17,7 @@ The metadata does not claim an endorsement, compare Alignbase with another produ
 | Host | Supported path |
 | --- | --- |
 | OpenAI | Codex package cards and composer surfaces read `interface.logo` and `interface.composerIcon` from `.codex-plugin/plugin.json`. Both paths start with `./` and point to the 400 by 400 PNG inside the plugin. OpenAI accepts square PNG, JPEG, WebP, or SVG files up to 5 MiB. Raster images must be between 48 by 48 and 4,096 by 4,096 pixels. Our PNG is 88,013 bytes, decodes as 8-bit RGBA, and is comfortably inside every limit. |
-| Claude | The directory portal accepts a square icon of at least 128 by 128 pixels. The plugin manifest points to the bundled 400 by 400 SVG. The same logo is available as a PNG. |
+| Claude | The plugin manifest points to a bundled 1024 by 1024 PNG. The directory portal's separate icon upload requires a square PNG or JPEG between 512 and 2048 pixels; the same PNG is awaiting review. |
 | Cursor | Cursor reads `logo` as a repo-relative path or an absolute URL and recommends committing the file to the repository. Cursor does not publish size, aspect-ratio, or file-size limits. The catalog and plugin manifest both point to a valid, self-contained 400 by 400 SVG, which matches Cursor's documented `assets/logo.svg` example. |
 
 ## Shared production details
@@ -159,7 +159,7 @@ The same Claude directory listing is available in Cowork and Claude Code. In Cla
 | Privacy policy | `https://alignbase.com/privacy/` |
 | Terms | `https://alignbase.com/terms/` |
 | Support | `https://alignbase.com/support/` |
-| Logo | The plugin manifest's `icon` field points to `assets/alignbase-logo.svg`, a square 400 by 400 image. |
+| Logo | The plugin manifest's `icon` field points to `assets/alignbase-logo-directory.png`, a square 1024 by 1024 image. The same PNG was uploaded separately for the current directory listing. |
 | Test account | `tester@alignbase.com`; keep its password only in the portal's private reviewer field |
 | MCP endpoint | `https://app.alignbase.com/mcp` |
 | Example prompts | Use the first three starter prompts below |

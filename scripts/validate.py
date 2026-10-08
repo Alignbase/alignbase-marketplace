@@ -73,7 +73,7 @@ def assert_svg_logo(relative_path: str) -> None:
     assert len(root.findall("svg:path", namespace)) == 3
 
 
-def assert_png_logo(relative_path: str) -> None:
+def assert_png_logo(relative_path: str, expected_size: int = 400) -> None:
     path = ROOT / relative_path
     data = path.read_bytes()
     assert 0 < len(data) <= MAX_OPENAI_IMAGE_BYTES
@@ -103,7 +103,7 @@ def assert_png_logo(relative_path: str) -> None:
     width, height, bit_depth, color_type, compression, filtering, interlace = (
         struct.unpack(">IIBBBBB", ihdr)
     )
-    assert (width, height) == (400, 400)
+    assert (width, height) == (expected_size, expected_size)
     assert MIN_OPENAI_RASTER_DIMENSION <= width <= MAX_OPENAI_RASTER_DIMENSION
     assert width == height
     assert (bit_depth, color_type, compression, filtering, interlace) == (
@@ -232,7 +232,9 @@ def main() -> None:
     )
     assert "userConfig" not in claude_manifest
     assert_mcp_server("plugins/claude/alignbase/.mcp.json")
+    assert claude_manifest["icon"] == "./assets/alignbase-logo-directory.png"
     assert_png_logo("plugins/claude/alignbase/assets/alignbase-logo.png")
+    assert_png_logo("plugins/claude/alignbase/assets/alignbase-logo-directory.png", 1024)
     assert_svg_logo("plugins/claude/alignbase/assets/alignbase-logo.svg")
 
     cursor_manifest = read_json(

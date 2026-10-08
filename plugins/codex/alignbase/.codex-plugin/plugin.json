@@ -1,13 +1,13 @@
 {
   "name": "alignbase",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Load approved Alignbase context and record agent activity with native hooks.",
   "author": {
     "name": "Alignbase",
-    "email": "support@alignbase.ai",
-    "url": "https://alignbase.ai"
+    "email": "support@alignbase.com",
+    "url": "https://alignbase.com"
   },
-  "homepage": "https://alignbase.ai",
+  "homepage": "https://alignbase.com",
   "repository": "https://github.com/Alignbase/alignbase-marketplace",
   "license": "MIT",
   "keywords": ["agents", "context", "governance", "mcp"],
@@ -19,9 +19,9 @@
     "developerName": "Alignbase",
     "category": "Productivity",
     "capabilities": ["Read context", "Manage context", "Session startup", "Activity reporting", "Subagent lineage"],
-    "websiteURL": "https://alignbase.ai",
-    "privacyPolicyURL": "https://alignbase.ai/privacy/",
-    "termsOfServiceURL": "https://alignbase.ai/terms/",
+    "websiteURL": "https://alignbase.com",
+    "privacyPolicyURL": "https://alignbase.com/privacy/",
+    "termsOfServiceURL": "https://alignbase.com/terms/",
     "defaultPrompt": [
       "Load the Alignbase context assigned to this agent.",
       "List the Alignbase Skills available to this agent."

@@ -9,8 +9,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MCP_URL = "https://app.alignbase.ai/mcp"
-OPENAI_APP_ID = "asdk_app_6a6bd5435cc08191846e6a069bddcb16"
+MCP_URL = "https://app.alignbase.com/mcp"
+OPENAI_APP_ID = "asdk_app_6ac6fb6d7d908191a720e44866608dca"
 MAX_OPENAI_IMAGE_BYTES = 5 * 1024 * 1024
 MIN_OPENAI_RASTER_DIMENSION = 48
 MAX_OPENAI_RASTER_DIMENSION = 4096

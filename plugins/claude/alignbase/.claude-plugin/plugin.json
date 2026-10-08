@@ -2,19 +2,19 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "alignbase",
   "displayName": "Alignbase",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Access workspace-approved Knowledge, Skills, and Memory from Alignbase.",
   "author": {
     "name": "Alignbase",
-    "email": "support@alignbase.ai",
-    "url": "https://alignbase.ai"
+    "email": "support@alignbase.com",
+    "url": "https://alignbase.com"
   },
-  "homepage": "https://alignbase.ai",
+  "homepage": "https://alignbase.com",
   "repository": "https://github.com/Alignbase/alignbase-marketplace",
   "icon": "./assets/alignbase-logo.svg",
-  "privacyPolicyUrl": "https://alignbase.ai/privacy/",
-  "termsOfServiceUrl": "https://alignbase.ai/terms/",
-  "supportUrl": "https://alignbase.ai/support/",
+  "privacyPolicyUrl": "https://alignbase.com/privacy/",
+  "termsOfServiceUrl": "https://alignbase.com/terms/",
+  "supportUrl": "https://alignbase.com/support/",
   "documentationUrl": "https://github.com/Alignbase/alignbase-marketplace/tree/main/plugins/claude/alignbase#readme",
   "license": "MIT",
   "keywords": ["agents", "context", "governance", "mcp"]

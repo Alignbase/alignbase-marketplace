@@ -6,4 +6,4 @@ The plugin loads the context and Skills assigned to the current agent. In Codex,
 
 If setup fails, confirm that the workspace admin enabled the Alignbase app for your role, then reconnect it. In Codex, also review the lifecycle hooks and start a new session.
 
-Support: <https://alignbase.ai/support/>. Privacy: <https://alignbase.ai/privacy/>. Terms: <https://alignbase.ai/terms/>.
+Support: <https://alignbase.com/support/>. Privacy: <https://alignbase.com/privacy/>. Terms: <https://alignbase.com/terms/>.

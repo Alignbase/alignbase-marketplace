@@ -2,7 +2,7 @@
   "mcpServers": {
     "alignbase": {
       "type": "http",
-      "url": "https://app.alignbase.ai/mcp"
+      "url": "https://app.alignbase.com/mcp"
     }
   }
 }

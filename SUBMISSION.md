@@ -10,7 +10,7 @@ The Alignbase OpenAI app submission, `asdk_app_6ac6fb6d7d908191a720e44866608dca`
 
 The public terms, privacy, and support pages were checked again on September 27, 2026. The Claude developer portal accepted the public plugin source in its initial validation. Before submission, connect GitHub to the submitting Claude organization, verify the existing sample-data reviewer account, and complete the policy acknowledgements with an authorized company representative. Section 2F warrants a transparent description of the startup context behavior for Anthropic's review.
 
-The metadata does not claim an endorsement, compare Alignbase with another product, hide paid actions, or promise unsupported features. The plugins contain no API keys, fixed OAuth client IDs, passwords, or telemetry configuration.
+The metadata does not claim an endorsement, compare Alignbase with another product, hide paid actions, or promise unsupported features. The packages contain no API keys, fixed OAuth client IDs, or passwords. Codex and Claude hooks report Activity to Alignbase when enabled.
 
 ## Logo delivery by host
 
@@ -63,7 +63,7 @@ One submitted app is pending review for the universal directory shared by ChatGP
 | Submission type | With MCP |
 | Plugin name | Alignbase |
 | Short description | Your team's approved context. |
-| Long description | Connect ChatGPT and Codex to the context and Skills assigned to the current agent in Alignbase. MCP tools load or manage Alignbase context when the agent has permission. In Codex, a user-approved startup hook loads context when a session starts. |
+| Long description | Connect ChatGPT and Codex to the context and Skills assigned to the current agent in Alignbase. MCP tools load or manage Alignbase context when the agent has permission. In Codex, user-approved lifecycle hooks load context and report turns and subagent relationships through the authenticated Alignbase app. |
 | Developer Identity | Select the verified Alignbase business identity |
 | Category | Productivity |
 | Logo | Upload `plugins/codex/alignbase/assets/alignbase-logo.png` |
@@ -84,55 +84,34 @@ The package manifest is `plugins/codex/alignbase/.codex-plugin/plugin.json`. It 
 
 ### Starter prompts
 
-1. Load the Alignbase context assigned to this agent.
-2. List the Alignbase Skills available to this agent.
-3. Read the published version of the release-check Skill from Alignbase.
-4. Show me the context alignments this agent can read and which ones it can edit.
-5. Propose a new context alignment for our release review policy, but do not publish it.
+1. Load my current Alignbase context.
+2. Find and read a published Alignbase Skill.
+3. Find and read published Alignbase Knowledge.
+4. Publish a Skill version I explicitly name.
+5. Update Alignbase Memory while preserving its existing content.
 
 ### Positive test cases
 
-1. **Load current context**
-   - Prompt: `Load the Alignbase context assigned to this agent.`
-   - Expected tools: `get_current_context`
-   - Expected result: Published context and available Skill summaries for the demo agent, with no write.
-   - Fixture: Demo agent tagged to at least one published context alignment and one published Skill.
-2. **List available Skills**
-   - Prompt: `List the Alignbase Skills available to this agent.`
-   - Expected tools: `list_skills`
-   - Expected result: A concise list with names, versions, and permissions.
-   - Fixture: At least two published Skills.
-3. **Read a published Skill**
-   - Prompt: `Read the published release-check Skill from Alignbase.`
-   - Expected tools: `list_skills`, then `read_skill` with the published version.
-   - Expected result: The Skill package and install metadata.
-   - Fixture: A published `release-check` Skill.
-4. **Create a review proposal**
-   - Prompt: `Propose a new context alignment for our release review policy. Do not publish it.`
-   - Expected tools: `propose_context_alignment`
-   - Expected result: A proposal ID and confirmation that no saved or published context was created.
-   - Fixture: Demo agent with write permission.
-5. **Publish an explicitly requested version**
-   - Prompt: `Publish the latest saved version of the release-review context alignment.`
-   - Expected tools: `list_context_alignments` or `read_context_alignment`, then `publish_context_alignment`
-   - Expected result: The requested version is published after the agent resolves the current ID and version.
-   - Fixture: Demo agent with publish permission and an unpublished saved version.
+The submitted form uses the `tester@alignbase.com` account and `Test Tester's
+Agent`. Its sample Resources and permissions are listed in the private app
+repository's `plugins/README.md`. These summaries describe the five submitted
+cases; `plugins/chatgpt-app-submission.json` in that repository holds the exact
+prompts and expected results:
+
+1. Load current context with `get_current_context`. The answer must identify `Reviewer Sample Knowledge`, the `reviewer-sample` Skill, and `Submission Review Memory`.
+2. Find and read the published `reviewer-sample` package with `list_skills` and `read_skill`, including its version, digest, and install metadata.
+3. Find and read `Reviewer Sample Knowledge` with `list_knowledge` and `read_knowledge`, including its authority, version, and two existing bullets.
+4. Find the currently published `reviewer-sample` version with `list_skills`, then call `publish_skill` with that same version. It must report that nothing changed.
+5. Read `Submission Review Memory` with `list_memories` and `read_memory`, then use `write_memory` with the latest version. Keep `- Submission review check: ready` exactly once and preserve all other content.
 
 ### Negative test cases
 
-1. **Unsupported tag administration**
-   - Prompt: `Create a new Finance tag and assign it to every agent.`
-   - Expected behavior: Explain that the MCP tools cannot create tags or change tag assignments. Do not misuse another write tool.
-2. **Unsupported deletion**
-   - Prompt: `Delete the release-review context alignment permanently.`
-   - Expected behavior: Explain that no delete tool is available. Do not overwrite the document with empty content.
-3. **Permission boundary**
-   - Prompt: `Publish the security policy even if this agent lacks publish access.`
-   - Expected behavior: Do not bypass permission checks. Report the permission failure and ask the user to use an authorized agent or administrator.
+The three submitted negative cases ask about unrelated scheduling, host memory
+settings, and repository access. None should invoke the Alignbase plugin.
 
 ### Tool annotation review
 
-All tools operate inside a private Alignbase tenant, so `openWorldHint` is `false`. Read and list tools use `readOnlyHint: true` and `destructiveHint: false`. Create, proposal, publish, and sync-report tools use `readOnlyHint: false` and `destructiveHint: false`. Full-document replacement tools use `readOnlyHint: false` and `destructiveHint: true`.
+All tools operate inside a private Alignbase tenant, so `openWorldHint` is `false`. Most read and list tools use `readOnlyHint: true` and `destructiveHint: false`; `read_inbox` changes read status. Create, proposal, publish, and sync-report tools use `readOnlyHint: false` and `destructiveHint: false`. Full-document replacement tools use `readOnlyHint: false` and `destructiveHint: true`.
 
 Before submission, scan the production MCP server in the portal and inspect every response. OpenAI asks developers to remove personal data, authentication secrets, debug payloads, internal identifiers, and timestamps unless the user needs them for the stated workflow. Pay particular attention to draft author email fields and IDs in list and read responses.
 
@@ -147,7 +126,7 @@ Before submission, scan the production MCP server in the portal and inspect ever
 7. Enter the Universal MCP URL and OAuth details.
 8. Deploy the generated domain challenge token at the exact well-known path.
 9. Select **Scan Tools**. Review every tool name, description, input schema, output, and annotation.
-10. Add the starter prompts and eight test cases above.
+10. Add the starter prompts above and the exact five positive and three negative test cases from `plugins/chatgpt-app-submission.json` in the private app repository.
 11. Select the approved countries and regions, add the release notes, and make the policy attestations only after the blockers are closed.
 12. Submit for review. After approval, return to the portal and publish the approved version.
 

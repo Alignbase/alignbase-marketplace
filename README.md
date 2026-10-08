@@ -4,14 +4,14 @@ This repository contains the official Alignbase plugin packages for the OpenAI u
 
 ## ChatGPT and Codex
 
-The OpenAI universal plugin package works with both ChatGPT and Codex. In ChatGPT, add the `alignbase` plugin from this marketplace. In Codex, run:
+The repository plugin is the preferred distribution path for lifecycle hooks on supported hosts. The public directory submission is a separate MCP distribution path without hooks. In ChatGPT, add the `alignbase` plugin from this marketplace. In Codex, run:
 
 ```sh
 codex plugin marketplace add Alignbase/alignbase-marketplace &&
 codex plugin add alignbase@alignbase
 ```
 
-Enable the plugin, connect the required Alignbase app when prompted, and sign in to Alignbase. In Codex, approve the startup hook and begin a new session.
+The repository plugin connects directly to the Alignbase remote MCP server with OAuth. Enable the plugin, connect when prompted, and sign in to Alignbase. It does not depend on the public directory submission. In Codex, approve the startup hook and begin a new session.
 
 ## Claude
 
@@ -31,7 +31,7 @@ claude
 
 Connect the Alignbase MCP server when prompted, sign in, and start a new Cowork or Claude Code session.
 
-Version 1.2.0 uses `https://app.alignbase.com/mcp`. Existing plugin installs
+Version 1.2.1 uses `https://app.alignbase.com/mcp`. Existing plugin installs
 using `https://app.alignbase.ai/mcp` continue to work while teams upgrade.
 
 ## Cursor
@@ -70,8 +70,10 @@ Run the local checks before pushing:
 
 ```sh
 python3 scripts/validate.py
-claude plugin validate plugins/claude/alignbase --strict
+claude plugin validate plugins/claude/alignbase
 ```
+
+The Claude validator reports warnings for the directory metadata fields described in `SUBMISSION.md`. Keep those fields for the directory listing; validation errors must still pass before publishing.
 
 See `SUBMISSION.md` for the store fields, review checks, and unresolved submission blockers.
 

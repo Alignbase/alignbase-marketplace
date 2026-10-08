@@ -6,7 +6,7 @@ Reviewed against the public store documentation on September 27, 2026.
 
 The four packages have store-native manifests, dynamic OAuth configuration, the same 400 by 400 Alignbase logo with a blue background, and public source paths in this repository. Codex uses the PNG from its `interface` metadata, and Cursor uses the repo-relative SVG from both its marketplace entry and plugin manifest. Claude's directory submission reads the SVG icon and policy links from the plugin manifest.
 
-The Alignbase OpenAI app submission, `asdk_app_6ac6fb6d7d908191a720e44866608dca`, is pending review. The ChatGPT and Codex plugin references that app as required. Codex also loads the package's startup hooks, while ChatGPT uses the app without those hooks.
+The Alignbase OpenAI app submission, `asdk_app_6ac6fb6d7d908191a720e44866608dca`, is pending review. The repository plugin connects directly to the MCP endpoint with OAuth and does not reference the submission. It retains lifecycle hooks for supported hosts. Public directory submissions cannot include lifecycle hooks.
 
 The public terms, privacy, and support pages were checked again on September 27, 2026. The Claude developer portal accepted the public plugin source in its initial validation. Before submission, connect GitHub to the submitting Claude organization, verify the existing sample-data reviewer account, and complete the policy acknowledgements with an authorized company representative. Section 2F warrants a transparent description of the startup context behavior for Anthropic's review.
 
@@ -63,7 +63,7 @@ One submitted app is pending review for the universal directory shared by ChatGP
 | Submission type | With MCP |
 | Plugin name | Alignbase |
 | Short description | Your team's approved context. |
-| Long description | Connect ChatGPT and Codex to the context and Skills assigned to the current agent in Alignbase. MCP tools load or manage Alignbase context when the agent has permission. In Codex, user-approved lifecycle hooks load context and report turns and subagent relationships through the authenticated Alignbase app. |
+| Long description | Connect ChatGPT and Codex to the context and Skills assigned to the current agent in Alignbase. MCP tools load or manage Alignbase context when the agent has permission. |
 | Developer Identity | Select the verified Alignbase business identity |
 | Category | Productivity |
 | Logo | Upload `plugins/codex/alignbase/assets/alignbase-logo.png` |
@@ -80,7 +80,7 @@ One submitted app is pending review for the universal directory shared by ChatGP
 | Countries and regions | Select only markets covered by Alignbase's terms, privacy policy, support, and export review |
 | Release notes | Initial submission of Alignbase. Loads approved context and Skills assigned to an agent and provides permission-scoped MCP tools for reading, drafting, writing, and publishing Alignbase context. OAuth uses dynamic client registration and PKCE. No UI is included. |
 
-The package manifest is `plugins/codex/alignbase/.codex-plugin/plugin.json`. It points to `.app.json` and the square PNG. The app reference uses `asdk_app_6ac6fb6d7d908191a720e44866608dca` with `required: true`, so installing the plugin also requires the Alignbase app. Codex discovers the startup hook from the package's standard `hooks/hooks.json` path. ChatGPT does not run those Codex hooks. The listing logo and composer icon use the same blue-background asset. The public universal directory also has its own logo upload in the OpenAI submission form.
+The repository package manifest is `plugins/codex/alignbase/.codex-plugin/plugin.json`. It points to `.mcp.json` and the square PNG. Codex discovers lifecycle hooks from `hooks/hooks.json`. This repository package is separate from the in-review MCP submission and is the preferred installation path when hooks are needed. Do not upload its hooks to the public directory. The public directory has its own logo upload in the OpenAI submission form.
 
 ### Starter prompts
 
@@ -181,7 +181,7 @@ The Source validator may warn that `icon`, `documentationUrl`, `privacyPolicyUrl
 ### Submission steps
 
 1. Confirm the reviewer account has sample data and working access.
-2. Run `claude plugin validate plugins/claude/alignbase --strict` and `python3 scripts/validate.py`.
+2. Run `claude plugin validate plugins/claude/alignbase` and `python3 scripts/validate.py`.
 3. Test the plugin from the public GitHub source in a new Cowork session and a new Claude Code session.
 4. Connect a GitHub account with push access to the public repository in the submitting Claude organization. The portal checks this before it saves or submits the listing.
 5. In the developer portal, submit the plugin bundle from this repository. It already includes the remote MCP server configuration. A standalone connector is a separate, optional listing, not a prerequisite for the plugin bundle. Validate again after each source change.

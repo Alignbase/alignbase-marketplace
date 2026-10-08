@@ -10,7 +10,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MCP_URL = "https://app.alignbase.com/mcp"
-OPENAI_APP_ID = "asdk_app_6ac6fb6d7d908191a720e44866608dca"
 MAX_OPENAI_IMAGE_BYTES = 5 * 1024 * 1024
 MIN_OPENAI_RASTER_DIMENSION = 48
 MAX_OPENAI_RASTER_DIMENSION = 4096
@@ -166,8 +165,8 @@ def main() -> None:
 
     codex_manifest = read_json("plugins/codex/alignbase/.codex-plugin/plugin.json")
     assert codex_manifest["name"] == "alignbase"
-    assert codex_manifest["apps"] == "./.app.json"
-    assert "mcpServers" not in codex_manifest
+    assert "apps" not in codex_manifest
+    assert codex_manifest["mcpServers"] == "./.mcp.json"
     assert "hooks" not in codex_manifest
     assert codex_manifest["interface"]["defaultPrompt"] == [
         "Load the Alignbase context assigned to this agent.",
@@ -179,16 +178,9 @@ def main() -> None:
     assert codex_manifest["interface"]["composerIcon"] == codex_logo
     assert_png_logo("plugins/codex/alignbase/assets/alignbase-logo.png")
     assert_svg_logo("plugins/codex/alignbase/assets/alignbase-logo.svg")
-    codex_apps = read_json("plugins/codex/alignbase/.app.json")
-    assert codex_apps == {
-        "apps": {
-            "alignbase": {
-                "id": OPENAI_APP_ID,
-                "required": True,
-            }
-        }
-    }
-    assert not (ROOT / "plugins/codex/alignbase/.mcp.json").exists()
+    assert_mcp_server("plugins/codex/alignbase/.mcp.json")
+    codex_servers = read_json("plugins/codex/alignbase/.mcp.json")["mcpServers"]
+    assert not (ROOT / "plugins/codex/alignbase/.app.json").exists()
 
     codex_hooks = read_json("plugins/codex/alignbase/hooks/hooks.json")
     codex_lifecycle_hooks = codex_hooks["hooks"]
@@ -196,7 +188,7 @@ def main() -> None:
     codex_start_hook = codex_session_hooks[0]
     assert codex_start_hook["type"] == "mcp_tool"
     assert codex_start_hook["server"] == "alignbase"
-    assert codex_start_hook["server"] in codex_apps["apps"]
+    assert codex_start_hook["server"] in codex_servers
     assert codex_start_hook["tool"] == "start_hook_session"
     assert codex_start_hook["input"]["adapter_version"] == codex_manifest["version"]
     codex_command_hook = codex_session_hooks[1]
@@ -213,7 +205,7 @@ def main() -> None:
         for event_handler in event_handlers:
             for hook in event_handler["hooks"]:
                 if hook["type"] == "mcp_tool":
-                    assert hook["server"] in codex_apps["apps"]
+                    assert hook["server"] in codex_servers
 
     hook_output = subprocess.run(
         ["sh", str(ROOT / "plugins/codex/alignbase/scripts/session-start.sh")],

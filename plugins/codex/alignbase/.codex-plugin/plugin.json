@@ -1,6 +1,6 @@
 {
   "name": "alignbase",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Load approved Alignbase context and record agent activity with native hooks.",
   "author": {
     "name": "Alignbase",
@@ -10,15 +10,25 @@
   "homepage": "https://alignbase.com",
   "repository": "https://github.com/Alignbase/alignbase-marketplace",
   "license": "MIT",
-  "keywords": ["agents", "context", "governance", "mcp"],
-  "apps": "./.app.json",
+  "keywords": [
+    "agents",
+    "context",
+    "governance",
+    "mcp"
+  ],
   "interface": {
     "displayName": "Alignbase",
     "shortDescription": "Your team's approved context.",
-    "longDescription": "Connect ChatGPT and Codex to the context and Skills assigned to the current agent in Alignbase. MCP tools load or manage Alignbase context when the agent has permission. In Codex, user-approved lifecycle hooks load context and report turns and subagent relationships through the authenticated Alignbase app.",
+    "longDescription": "Connect ChatGPT and Codex to the context and Skills assigned to the current agent in Alignbase. MCP tools load or manage Alignbase context when the agent has permission. In Codex, user-approved lifecycle hooks load context and report turns and subagent relationships through the authenticated Alignbase MCP connection.",
     "developerName": "Alignbase",
     "category": "Productivity",
-    "capabilities": ["Read context", "Manage context", "Session startup", "Activity reporting", "Subagent lineage"],
+    "capabilities": [
+      "Read context",
+      "Manage context",
+      "Session startup",
+      "Activity reporting",
+      "Subagent lineage"
+    ],
     "websiteURL": "https://alignbase.com",
     "privacyPolicyURL": "https://alignbase.com/privacy/",
     "termsOfServiceURL": "https://alignbase.com/terms/",
@@ -29,5 +39,6 @@
     "brandColor": "#075CF5",
     "composerIcon": "./assets/alignbase-logo.png",
     "logo": "./assets/alignbase-logo.png"
-  }
+  },
+  "mcpServers": "./.mcp.json"
 }

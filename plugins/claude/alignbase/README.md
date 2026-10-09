@@ -14,6 +14,5 @@ Try these requests after connecting an agent that has sample Knowledge and Skill
 
 Support: <https://alignbase.com/support/>. Privacy: <https://alignbase.com/privacy/>. Terms: <https://alignbase.com/terms/>.
 
-Version 1.3.0 also records tool and lifecycle metadata on supported hosts.
-Tokens and cost require the host collector connection. See
-[scripts/activity/README.md](scripts/activity/README.md) for setup.
+Version 1.3.1 records tool and lifecycle metadata through supported host hooks.
+No separate collector installation is required. Token and cost collection is not enabled.

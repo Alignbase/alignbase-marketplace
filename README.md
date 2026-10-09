@@ -31,7 +31,7 @@ claude
 
 Connect the Alignbase MCP server when prompted, sign in, and start a new Cowork or Claude Code session.
 
-Version 1.3.0 uses `https://app.alignbase.com/mcp`. Existing plugin installs
+Version 1.3.1 uses `https://app.alignbase.com/mcp`. Existing plugin installs
 using `https://app.alignbase.ai/mcp` continue to work while teams upgrade.
 
 ## Cursor

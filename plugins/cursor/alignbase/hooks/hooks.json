@@ -4,54 +4,6 @@
     "sessionStart": [
       {
         "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/session-start.mjs\""
-      },
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" sessionStart"
-      }
-    ],
-    "preToolUse": [
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" preToolUse"
-      }
-    ],
-    "postToolUse": [
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" postToolUse"
-      }
-    ],
-    "postToolUseFailure": [
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" postToolUseFailure"
-      }
-    ],
-    "sessionEnd": [
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" sessionEnd"
-      }
-    ],
-    "preCompact": [
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" preCompact"
-      }
-    ],
-    "beforeSubmitPrompt": [
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" beforeSubmitPrompt"
-      }
-    ],
-    "afterAgentResponse": [
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" afterAgentResponse"
-      }
-    ],
-    "subagentStart": [
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" subagentStart"
-      }
-    ],
-    "subagentStop": [
-      {
-        "command": "node \"${CURSOR_PLUGIN_ROOT}/scripts/activity-hook.mjs\" subagentStop"
       }
     ]
   }

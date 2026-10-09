@@ -200,6 +200,12 @@ def main() -> None:
         "Stop",
         "SubagentStart",
         "SubagentStop",
+        "PreToolUse",
+        "PostToolUse",
+        "SessionEnd",
+        "PreCompact",
+        "PermissionRequest",
+        "Interrupt",
     }
     for event_handlers in codex_lifecycle_hooks.values():
         for event_handler in event_handlers:
@@ -309,11 +315,9 @@ def main() -> None:
     assert claude_start_hook["input"]["adapter_version"] == claude_manifest["version"]
     assert len(claude_session_hooks) == 1
     assert set(claude_lifecycle_hooks) == {
-        "SessionStart",
-        "UserPromptSubmit",
-        "Stop",
-        "SubagentStart",
-        "SubagentStop",
+        "SessionStart", "UserPromptSubmit", "Stop", "SubagentStart", "SubagentStop",
+        "PreToolUse", "PostToolUse", "PostToolUseFailure", "SessionEnd", "PreCompact",
+        "PermissionRequest", "PostModelSwitch",
     }
     assert claude_lifecycle_hooks["UserPromptSubmit"][0]["hooks"][0]["tool"] == "start_hook_session"
     assert not (ROOT / "plugins/claude/alignbase/scripts/session-start.mjs").exists()

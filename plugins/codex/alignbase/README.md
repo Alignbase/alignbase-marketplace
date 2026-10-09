@@ -11,3 +11,7 @@ If setup fails, check that your host supports repository plugins with remote MCP
 The public directory submission is a separate MCP distribution path. OpenAI currently excludes lifecycle hooks from directory submissions.
 
 Support: <https://alignbase.com/support/>. Privacy: <https://alignbase.com/privacy/>. Terms: <https://alignbase.com/terms/>.
+
+Version 1.3.0 also records tool and lifecycle metadata on supported hosts.
+Tokens and cost require the host collector connection. See
+[scripts/activity/README.md](scripts/activity/README.md) for setup.

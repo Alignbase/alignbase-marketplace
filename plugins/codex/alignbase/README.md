@@ -12,5 +12,5 @@ The public directory submission is a separate MCP distribution path. OpenAI curr
 
 Support: <https://alignbase.com/support/>. Privacy: <https://alignbase.com/privacy/>. Terms: <https://alignbase.com/terms/>.
 
-Version 1.3.1 records tool and lifecycle metadata through supported host hooks.
+Version 1.3.2 records tool and lifecycle metadata through supported host hooks.
 No separate collector installation is required. Token and cost collection is not enabled.

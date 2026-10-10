@@ -322,6 +322,13 @@ def main() -> None:
     assert claude_lifecycle_hooks["UserPromptSubmit"][0]["hooks"][0]["tool"] == "start_hook_session"
     assert not (ROOT / "plugins/claude/alignbase/scripts/session-start.mjs").exists()
 
+    handback = claude_lifecycle_hooks["PostToolUse"][1]
+    assert handback["matcher"] == "^SubagentHandback$"
+    report = handback["hooks"][0]["input"]["event"]
+    assert report["source"] == "subagent_handback"
+    assert report["response_text"] == "${tool_input.message}"
+    assert report["event_id"] == "handback:${tool_use_id}"
+
     cursor_hooks = read_json("plugins/cursor/alignbase/hooks/hooks.json")
     cursor_command = cursor_hooks["hooks"]["sessionStart"][0]["command"]
     assert cursor_hooks["version"] == 1

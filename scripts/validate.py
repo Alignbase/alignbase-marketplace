@@ -207,6 +207,11 @@ def main() -> None:
         "PermissionRequest",
         "Interrupt",
     }
+    # Codex PermissionRequest has no tool_use_id. Template resolution fails
+    # before the MCP call if the hook references this unavailable field.
+    permission_hooks = codex_lifecycle_hooks["PermissionRequest"]
+    assert "${tool_use_id}" not in json.dumps(permission_hooks)
+
     for event_handlers in codex_lifecycle_hooks.values():
         for event_handler in event_handlers:
             for hook in event_handler["hooks"]:

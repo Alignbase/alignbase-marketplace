@@ -6,7 +6,7 @@ Reviewed against the public store documentation on September 27, 2026.
 
 The four packages have store-native manifests, dynamic OAuth configuration, the same 400 by 400 Alignbase logo with a blue background, and public source paths in this repository. Codex uses the PNG from its `interface` metadata, and Cursor uses the repo-relative SVG from both its marketplace entry and plugin manifest. Claude's plugin manifest now points to a bundled 1024 by 1024 PNG and includes policy links. The existing Claude directory submission has the same PNG uploaded separately and waiting for review; listing fields captured at submission do not update from later source changes.
 
-The Alignbase OpenAI app submission, `asdk_app_6ac6fb6d7d908191a720e44866608dca`, is pending review. The repository plugin connects directly to the MCP endpoint with OAuth and does not reference the submission. It retains lifecycle hooks for supported hosts. Public directory submissions cannot include lifecycle hooks.
+The ChatGPT/Codex repository plugin references the live Alignbase app, `asdk_app_6ac6fb6d7d908191a720e44866608dca`. Its Activity definition matches the approved published version. It retains lifecycle hooks for supported hosts. Public directory submissions cannot include lifecycle hooks.
 
 The public terms, privacy, and support pages were checked again on September 27, 2026. The Claude developer portal accepted the public plugin source in its initial validation. Before submission, connect GitHub to the submitting Claude organization, verify the existing sample-data reviewer account, and complete the policy acknowledgements with an authorized company representative. Section 2F warrants a transparent description of the startup context behavior for Anthropic's review.
 
@@ -80,7 +80,7 @@ One submitted app is pending review for the universal directory shared by ChatGP
 | Countries and regions | Select only markets covered by Alignbase's terms, privacy policy, support, and export review |
 | Release notes | Initial submission of Alignbase. Loads approved context and Skills assigned to an agent and provides permission-scoped MCP tools for reading, drafting, writing, and publishing Alignbase context. OAuth uses dynamic client registration and PKCE. No UI is included. |
 
-The repository package manifest is `plugins/codex/alignbase/.codex-plugin/plugin.json`. It points to `.mcp.json` and the square PNG. Codex discovers lifecycle hooks from `hooks/hooks.json`. This repository package is separate from the in-review MCP submission and is the preferred installation path when hooks are needed. Do not upload its hooks to the public directory. The public directory has its own logo upload in the OpenAI submission form.
+The repository package manifest is `plugins/codex/alignbase/.codex-plugin/plugin.json`. It points to `.app.json` and the square PNG, without a separate bundled MCP server. Codex discovers lifecycle hooks from `hooks/hooks.json`. This repository package is distributed through this marketplace and is the preferred installation path when hooks are needed. Do not upload its hooks to the public directory. The public directory has its own logo upload in the OpenAI submission form.
 
 ### Starter prompts
 

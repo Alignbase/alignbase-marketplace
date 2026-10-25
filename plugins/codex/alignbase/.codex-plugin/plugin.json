@@ -1,6 +1,6 @@
 {
   "name": "alignbase",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Load approved Alignbase context and record agent activity with native hooks.",
   "author": {
     "name": "Alignbase",
@@ -19,7 +19,7 @@
   "interface": {
     "displayName": "Alignbase",
     "shortDescription": "Your team's approved context.",
-    "longDescription": "Connect ChatGPT and Codex to the context and Skills assigned to the current agent in Alignbase. MCP tools load or manage Alignbase context when the agent has permission. In Codex, user-approved lifecycle hooks load context and report turns and subagent relationships through the authenticated Alignbase MCP connection.",
+    "longDescription": "Connect ChatGPT and Codex to the context and Skills assigned to the current agent through the official Alignbase app. In Codex, user-approved lifecycle hooks load context and record Activity through the same authenticated app connection.",
     "developerName": "Alignbase",
     "category": "Productivity",
     "capabilities": [
@@ -40,5 +40,5 @@
     "composerIcon": "./assets/alignbase-logo.png",
     "logo": "./assets/alignbase-logo.png"
   },
-  "mcpServers": "./.mcp.json"
+  "apps": "./.app.json"
 }

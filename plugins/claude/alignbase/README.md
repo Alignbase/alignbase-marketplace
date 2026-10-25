@@ -14,7 +14,7 @@ Try these requests after connecting an agent that has sample Knowledge and Skill
 
 Support: <https://alignbase.com/support/>. Privacy: <https://alignbase.com/privacy/>. Terms: <https://alignbase.com/terms/>.
 
-Version 1.3.2 records tool and lifecycle metadata through supported host hooks.
+Version 1.4.0 records tool and lifecycle metadata through supported host hooks.
 No separate collector installation is required. Token and cost collection is not enabled.
 
 On newer Claude Code versions, subagents return reports through SubagentHandback.

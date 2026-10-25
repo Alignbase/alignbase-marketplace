@@ -11,7 +11,7 @@ codex plugin marketplace add Alignbase/alignbase-marketplace &&
 codex plugin add alignbase@alignbase
 ```
 
-The repository plugin connects directly to the Alignbase remote MCP server with OAuth. Enable the plugin, connect when prompted, and sign in to Alignbase. It does not depend on the public directory submission. In Codex, approve the startup hook and begin a new session.
+The ChatGPT/Codex repository plugin uses the official Alignbase app connection. Enable the plugin, connect the app when prompted, and sign in to Alignbase. In Codex, review and trust the lifecycle hooks, then begin a new session. Version 1.4.0 removes the bundled direct-MCP connection; remove any separately configured Alignbase MCP connection after verifying the app works to avoid duplicate tools and capture.
 
 ## Claude
 
@@ -31,7 +31,7 @@ claude
 
 Connect the Alignbase MCP server when prompted, sign in, and start a new Cowork or Claude Code session.
 
-Version 1.3.2 uses `https://app.alignbase.com/mcp`. Existing plugin installs
+Version 1.4.0 uses `https://app.alignbase.com/mcp`. Existing plugin installs
 using `https://app.alignbase.ai/mcp` continue to work while teams upgrade.
 
 ## Cursor

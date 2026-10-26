@@ -205,7 +205,6 @@ def main() -> None:
         "SubagentStop",
         "PreToolUse",
         "PostToolUse",
-        "SessionEnd",
         "PreCompact",
         "PermissionRequest",
         "Interrupt",
@@ -222,6 +221,7 @@ def main() -> None:
                     assert hook["server"] in codex_servers
                     assert hook["tool"] in {"alignbase.start_hook_session", "alignbase.record_hook_activity_event"}
                     assert hook["input"]["adapter_version"] == codex_manifest["version"]
+                    assert "session_end_event" not in hook["input"]["capabilities"]
 
     hook_output = subprocess.run(
         ["sh", str(ROOT / "plugins/codex/alignbase/scripts/session-start.sh")],

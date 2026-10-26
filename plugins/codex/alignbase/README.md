@@ -12,7 +12,7 @@ When upgrading from a direct-MCP install, remove any separately configured Align
 
 Support: <https://alignbase.com/support/>. Privacy: <https://alignbase.com/privacy/>. Terms: <https://alignbase.com/terms/>.
 
-Version 1.4.0 records tool and lifecycle metadata through supported host hooks.
+Version 1.4.1 records tool and lifecycle metadata through supported host hooks.
 No separate collector installation is required. Token and cost collection is not enabled.
 
-Use a Codex runtime with MCP tool-hook support. Older runtimes may reject these hooks. Codex currently skips SessionEnd MCP hooks, so session-end capture remains incomplete.
+Use a Codex runtime with MCP tool-hook support. Older runtimes may reject these hooks. This package omits the unsupported SessionEnd MCP hook and does not advertise session-end capture. Prompt, final-response, tool, permission, interrupt, compaction, and subagent hooks remain enabled.

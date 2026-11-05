@@ -14,10 +14,14 @@ Try these requests after connecting an agent that has sample Knowledge and Skill
 
 Support: <https://alignbase.com/support/>. Privacy: <https://alignbase.com/privacy/>. Terms: <https://alignbase.com/terms/>.
 
-Version 1.4.1 records tool and lifecycle metadata through supported host hooks.
+Version 1.4.2 records tool and lifecycle metadata through supported host hooks.
 No separate collector installation is required. Token and cost collection is not enabled.
 
 On newer Claude Code versions, subagents return reports through SubagentHandback.
 The plugin records that returned message through the same authenticated MCP
 hook, alongside the subagent stop event. It does not collect general tool inputs
 or transcript files.
+
+Claude Code loads context once before the first answer through a startup command hook and the connected MCP tool. Compaction requests one refresh. Prompt hooks record Activity and provide session references without reloading context. Shutdown recording is not advertised because the CLI may have no MCP client at exit.
+
+For non-interactive print mode, grant the exact context tool exposed by `/mcp`, including the account-inherited connector name when used. A connected label alone does not establish that a print session can use that tool. Respect tool approval failures.

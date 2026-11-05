@@ -319,17 +319,18 @@ def main() -> None:
     assert claude_lifecycle_hooks["SessionStart"][0]["matcher"] == "startup|resume|clear|compact|fork"
     claude_session_hooks = claude_lifecycle_hooks["SessionStart"][0]["hooks"]
     claude_start_hook = claude_session_hooks[0]
-    assert claude_start_hook["type"] == "mcp_tool"
-    assert claude_start_hook["server"] == "plugin:alignbase:alignbase"
-    assert claude_start_hook["tool"] == "start_hook_session"
-    assert claude_start_hook["input"]["adapter_version"] == claude_manifest["version"]
+    assert claude_start_hook["type"] == "command"
+    assert "session-start.sh" in claude_start_hook["command"]
+    bootstrap = subprocess.check_output(["sh", str(ROOT / "plugins/claude/alignbase/scripts/session-start.sh")], text=True)
+    assert "get_current_context" in json.loads(bootstrap)["hookSpecificOutput"]["additionalContext"]
     assert len(claude_session_hooks) == 1
     assert set(claude_lifecycle_hooks) == {
         "SessionStart", "UserPromptSubmit", "Stop", "SubagentStart", "SubagentStop",
-        "PreToolUse", "PostToolUse", "PostToolUseFailure", "SessionEnd", "PreCompact",
+        "PreToolUse", "PostToolUse", "PostToolUseFailure", "PreCompact",
         "PermissionRequest", "PostModelSwitch",
     }
-    assert claude_lifecycle_hooks["UserPromptSubmit"][0]["hooks"][0]["tool"] == "start_hook_session"
+    assert [h["tool"] for h in claude_lifecycle_hooks["UserPromptSubmit"][0]["hooks"]] == ["record_hook_activity_event"]
+    assert "session_end_event" not in json.dumps(claude_lifecycle_hooks)
     assert not (ROOT / "plugins/claude/alignbase/scripts/session-start.mjs").exists()
 
     handback = claude_lifecycle_hooks["PostToolUse"][1]

@@ -1,6 +1,6 @@
 {
   "name": "alignbase",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Load approved Alignbase context and record agent activity with native hooks.",
   "author": {
     "name": "Alignbase",

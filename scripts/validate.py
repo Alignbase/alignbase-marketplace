@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import json
+import re
 import struct
 import subprocess
 import xml.etree.ElementTree as ET
@@ -329,6 +330,12 @@ def main() -> None:
         "PreToolUse", "PostToolUse", "PostToolUseFailure", "PreCompact",
         "PermissionRequest", "PostModelSwitch",
     }
+    stops = claude_lifecycle_hooks["SubagentStop"]
+    assert len(stops) == 1
+    matcher = stops[0]["matcher"]
+    assert not re.search(matcher, "")
+    for agent_type in ("Explore", "general-purpose", "plugin:reviewer"):
+        assert re.search(matcher, agent_type)
     assert [h["tool"] for h in claude_lifecycle_hooks["UserPromptSubmit"][0]["hooks"]] == ["record_hook_activity_event"]
     assert "session_end_event" not in json.dumps(claude_lifecycle_hooks)
     assert not (ROOT / "plugins/claude/alignbase/scripts/session-start.mjs").exists()

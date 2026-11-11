@@ -331,11 +331,17 @@ def main() -> None:
         "PermissionRequest", "PostModelSwitch",
     }
     stops = claude_lifecycle_hooks["SubagentStop"]
-    assert len(stops) == 1
+    assert len(stops) == 2
     matcher = stops[0]["matcher"]
     assert not re.search(matcher, "")
     for agent_type in ("Explore", "general-purpose", "plugin:reviewer"):
         assert re.search(matcher, agent_type)
+    assert stops[1]["matcher"] == "^$"
+    assert stops[1]["hooks"][0]["input"]["event"]["actor_type"] == "unnamed"
+    assert re.search(stops[1]["matcher"], "")
+    assert not re.search(stops[1]["matcher"], "Explore")
+    assert claude_hooks["modules"] == ["./side-chat.mjs"]
+    subprocess.run(["node", str(ROOT / "scripts/test-side-chat.mjs")], check=True)
     assert [h["tool"] for h in claude_lifecycle_hooks["UserPromptSubmit"][0]["hooks"]] == ["record_hook_activity_event"]
     assert "session_end_event" not in json.dumps(claude_lifecycle_hooks)
     assert not (ROOT / "plugins/claude/alignbase/scripts/session-start.mjs").exists()

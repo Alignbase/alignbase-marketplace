@@ -10,7 +10,7 @@ export function register(on) {
         const received = await $.clock.now();
         const result = await $.mcp.call('plugin:alignbase:alignbase', 'record_hook_activity_event', {
           integration: 'claude',
-          adapter_version: '1.4.4',
+          adapter_version: '1.4.5',
           capabilities: ['context_session_start', 'prompt_submit', 'final_response', 'subagent_lifecycle', 'tool_use', 'lifecycle'],
           event: {
             schema_version: '1',

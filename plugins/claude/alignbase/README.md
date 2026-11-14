@@ -2,7 +2,13 @@
 
 Install and enable the plugin, connect the Alignbase MCP server when prompted, and sign in to Alignbase. Start a new Cowork or Claude Code session after authentication.
 
-The Alignbase MCP server provides the published Knowledge, Skills, and current Memory assigned to the connected agent. Your workspace controls what is assigned. In Claude Code, startup and prompt hooks request current context from Alignbase, and Claude receives it within its own instruction hierarchy. When Activity is enabled for the agent, authenticated Claude Code hooks send submitted prompts, final responses, and subagent relationships to Alignbase. Alignbase retains this data according to its [privacy policy](https://alignbase.com/privacy/). Read access works for every connected agent. Write and publish tools only work when the agent has the matching Alignbase permission.
+The Alignbase MCP server provides the published Knowledge, Skills, and current Memory assigned to the connected agent. Your workspace controls what is assigned. In Claude Code, the startup hook asks Claude to load current context from Alignbase, and Claude receives it within its own instruction hierarchy. When Activity is enabled for the agent, authenticated Claude Code hooks send submitted prompts, final responses, and subagent relationships to Alignbase. Alignbase retains this data according to its [privacy policy](https://alignbase.com/privacy/). Read access works for every connected agent. Write and publish tools only work when the agent has the matching Alignbase permission.
+
+For Claude Code 2.1.275 or later, install with:
+
+```text
+/plugin install alignbase --marketplace Alignbase/alignbase-marketplace
+```
 
 For Claude Code, use `/mcp` to inspect or reconnect the server. If setup fails, confirm that `https://app.alignbase.com/mcp` is reachable and start a new session after reconnecting.
 
@@ -37,3 +43,27 @@ No transcript files, system prompts, or private reasoning are collected.
 
 Update the plugin and start a new session to replace older hook configuration.
 Existing installed copies keep their old hooks until updated.
+
+## Hook behavior and data delivery
+
+The SessionStart hook runs the fixed local command
+`sh "${CLAUDE_PLUGIN_ROOT}/scripts/session-start.sh"`. That script only prints
+an instruction to call `get_current_context`; it does not read local files or
+make a network request. The returned instruction is subject to Claude's normal
+instruction hierarchy and tool approval.
+
+The remaining lifecycle hooks call `record_hook_activity_event` on the
+`plugin:alignbase:alignbase` MCP connection. They report prompts, final responses,
+subagent reports and relationships, and tool and lifecycle metadata when Activity
+is enabled. Calls go through the authenticated Alignbase MCP server at
+`https://app.alignbase.com/mcp`. The server applies the connected agent's live
+Activity settings, access checks, redaction, and retention policy.
+
+The `hooks/side-chat.mjs` module observes only the native `/btw` command. It reads
+the command's submitted arguments, session ID, and host clock, then calls the same
+fixed `record_hook_activity_event` tool to report that prompt. It does not fetch
+remote code or instructions, run shell commands, read transcript files, or read
+other local files. It invokes the MCP tool directly when the command runs,
+without asking the model to select a tool. It passes the original command event
+unchanged to `next(event)`, including when reporting fails. It does not approve
+tools, change permission modes, or change Remote Control settings.
